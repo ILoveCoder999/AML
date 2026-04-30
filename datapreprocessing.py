@@ -29,7 +29,7 @@ class FederatedLearningDataset:
         #Standardization processing, convert to tensors, normalization
         #Original image 32*32 pixels->224*224
         #(Higth,Width,Channels(RGB))
-        base_transform=transforms.Compose([
+        self.transforms=transforms.Compose([
                  transforms.Resize((224,224)),
                  transforms.ToTensor(),
                  transforms.Normalize((0.485, 0.456, 0.406),(0.229, 0.224, 0.225))
@@ -37,7 +37,7 @@ class FederatedLearningDataset:
             )
         #Temporary dataset, not normalized
         temp_dataset = torchvision.datasets.CIFAR100(
-            root=self.root, train=True, download=True, transform=base_transform
+            root=self.root, train=True, download=True, transform=self.transforms
         )
 
         #default: training vs test = 50 000 : 10 000,5:1
