@@ -1,4 +1,4 @@
-import torch
+ import torch
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
@@ -61,7 +61,7 @@ def aggregate_weights(local_weights_list):
 def run_fedavg_experiment():
     # configuration parameter
     N = 100           # totol clients
-    C = 0.1           # 每轮选择系数 (10% 参与度)
+    C = 0.1           # 
     J = 4             # 本地步数
     ROUNDS = 50       # 通信轮数 (根据 compute budget 自行调整)
     BATCH_SIZE = 32
