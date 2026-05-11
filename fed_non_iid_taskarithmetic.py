@@ -43,7 +43,7 @@ def run_federated_task_arithmetic_non_iid():
     # 3. Federated Training Loop
     for r in range(ROUNDS):
         local_weights = []
-        m = max(int(C * K), 1)
+        m = max(int(Nc * K), 1)
         selected_clients = torch.randperm(K)[:m].tolist()
 
         for client_id in selected_clients:

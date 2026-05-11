@@ -103,77 +103,48 @@ class FederatedLearningDataset:
     # Then, the data is divided into many small pieces (shards).
     # Finally, each client randomly selects Nc shards. 
     # each client only has data from a few classes,  Non-IID (non-independent and identically distributed) data.
-    def non_iid_partition(self):
-        print(f"Non-IID partition (Nc={self.C}) for {self.N}")
-        '''
-        1 order by labels
-        '''
-        #np -> high efficience  vstack accept np array
-        #create train set index(0-1):house number
-        total_train_dataset_index=np.arange(len(self.train_dataset))
-        #get all sample real label
-        total_train_labels=self.train_targets
-        #Stack the indices and labels vertically to form a 2 × N matrix.
-        # The first row : indices, and the second row : the corresponding labels.
-        total_train_dataset_index_labels=np.vstack((total_train_dataset_index,total_train_labels))
-        #matrix slicing Numpy:fancy indexing and vector opertation
-        #order by label
-        total_train_dataset_index_labels = total_train_dataset_index_labels[:, total_train_dataset_index_labels[1, :].argsort()]
-        #Sorted index ,we need to first line
-        order_index=total_train_dataset_index_labels[0,:]
+    def non_iid_partition(self, num_classes_per_client=None):
+        """
+        Non-IID partitioning logic based on shards.
+        Each client is given training samples belonging to Nc classes[cite: 44].
+        """
+        # If no Nc is passed, use the default from __init__
+        Nc = num_classes_per_client if num_classes_per_client is not None else self.C
+        print(f"Non-IID partition (Nc={Nc}) for {self.N} clients")
 
-        '''
-        2. Create Shards 
-        '''
-        # Total number of shards = (Number of clients) * (Shards per client)
-        total_shards = int(self.N * self.C)
+        # 1. Order indices by labels (Standard shard-based approach)
+        total_indices = np.arange(len(self.train_dataset))
+        labels = self.train_targets
 
-        # Number of samples in each shard
-        shards_size = int(len(self.train_dataset) // total_shards)
+        # Sort indices based on their corresponding labels
+        ordered_indices = total_indices[np.argsort(labels)]
 
-        # 1. Initialize an empty list to store the results
+        # 2. Define Shard Structure
+        # To satisfy Nc classes per client, we divide into N * Nc shards [cite: 44, 45]
+        total_shards = int(self.N * Nc)
+        samples_per_shard = len(ordered_indices) // total_shards
+
+        # 3. Create Shards List
         index_shard = []
-
-        # 2. Start the loop to slice the data into shards
         for i in range(total_shards):
-            # Calculate the starting and ending positions for the current shard
-            start = i * shards_size
-            end = (i + 1) * shards_size
+            start = i * samples_per_shard
+            # For the very last shard, take all remaining samples to avoid data loss
+            end = (i + 1) * samples_per_shard if i < total_shards - 1 else len(ordered_indices)
+            index_shard.append(ordered_indices[start:end])
 
-            # Slice a portion of the sorted indices (one shard)
-            current_shard = order_index[start:end]
-
-            # CRITICAL: Append the shard to the list to keep all shards (prevents overwriting)
-            index_shard.append(current_shard)
-
-
-        '''
-        3. Assign Shards to Clients
-        '''
-        # Initialize a dictionary to store indices for each client.
-
-        # Client ID:Value: NumPy array of sample indices.
-
+        # 4. Assign Shards to Clients
         dict_clients = {i: np.array([], dtype='int64') for i in range(self.N)}
+        available_shards = list(range(total_shards))
 
-        # Create a pool  as available shard indices [0, 1, 2, ..., total_shards-1].
-        tmp_shards = list(range(total_shards))
-
-        # Iterate through each client to assign data.
         for i in range(self.N):
-            # Each client randomly picks 'self.C' shards from the pool.
-            for _ in range(self.C):
-                # Randomly select one shard index from pool.
-                shard_index = np.random.choice(tmp_shards)
+            # Each client randomly picks Nc shards from the pool [cite: 44]
+            selected_shard_indices = np.random.choice(available_shards, int(Nc), replace=False)
 
-                # Concatenate the selected shard's data indices into the client's array.
-                dict_clients[i] = np.concatenate((dict_clients[i], index_shard[shard_index]))
+            for shard_idx in selected_shard_indices:
+                dict_clients[i] = np.concatenate((dict_clients[i], index_shard[shard_idx]))
+                # Remove from pool so no two clients share the same shard
+                available_shards.remove(shard_idx)
 
-                # Remove the selected shard from the pool to ensure it isn't picked again.
-                # This guarantees that each shard is assigned to exactly one client.
-                tmp_shards.remove(shard_index)
-
-        #mapping of clients :their respective data indices.
         return dict_clients
 
 
