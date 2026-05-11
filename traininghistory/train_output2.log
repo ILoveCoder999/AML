@@ -1,0 +1,210 @@
+Using device: cuda
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+IID partiton of 100 clients
+
+Using cache found in /home/xi/.cache/torch/hub/facebookresearch_dino_main
+/home/xi/miniconda3/envs/torch_env/lib/python3.10/site-packages/torch/cuda/__init__.py:716: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+FedAvg Setup: N=100, C=0.1, J=4, LR=0.01
+Round [  1/200] - LR: 0.01, Loss: 7.8786, Acc: 1.27%
+Round [  2/200] - LR: 0.01, Loss: 7.1821, Acc: 2.20%
+Round [  3/200] - LR: 0.01, Loss: 6.7060, Acc: 3.98%
+Round [  4/200] - LR: 0.01, Loss: 6.1734, Acc: 5.14%
+Round [  5/200] - LR: 0.01, Loss: 5.7580, Acc: 7.12%
+Round [  6/200] - LR: 0.01, Loss: 5.4275, Acc: 8.07%
+Round [  7/200] - LR: 0.01, Loss: 5.2850, Acc: 9.42%
+Round [  8/200] - LR: 0.01, Loss: 5.0159, Acc: 11.04%
+Round [  9/200] - LR: 0.01, Loss: 4.9695, Acc: 11.83%
+Round [ 10/200] - LR: 0.01, Loss: 4.8667, Acc: 13.77%
+Round [ 11/200] - LR: 0.01, Loss: 4.6507, Acc: 14.58%
+Round [ 12/200] - LR: 0.01, Loss: 4.5912, Acc: 15.81%
+Round [ 13/200] - LR: 0.01, Loss: 4.2650, Acc: 16.95%
+Round [ 14/200] - LR: 0.01, Loss: 4.2201, Acc: 18.53%
+Round [ 15/200] - LR: 0.01, Loss: 4.2697, Acc: 18.34%
+Round [ 16/200] - LR: 0.01, Loss: 4.2174, Acc: 19.72%
+Round [ 17/200] - LR: 0.01, Loss: 4.1550, Acc: 20.15%
+Round [ 18/200] - LR: 0.01, Loss: 4.1417, Acc: 20.65%
+Round [ 19/200] - LR: 0.01, Loss: 4.0781, Acc: 21.64%
+Round [ 20/200] - LR: 0.01, Loss: 3.9447, Acc: 22.67%
+Round [ 21/200] - LR: 0.01, Loss: 3.8811, Acc: 22.54%
+Round [ 22/200] - LR: 0.01, Loss: 3.8501, Acc: 23.60%
+Round [ 23/200] - LR: 0.01, Loss: 3.8056, Acc: 23.14%
+Round [ 24/200] - LR: 0.01, Loss: 3.6178, Acc: 25.64%
+Round [ 25/200] - LR: 0.01, Loss: 3.8008, Acc: 25.06%
+Round [ 26/200] - LR: 0.01, Loss: 3.7761, Acc: 24.60%
+Round [ 27/200] - LR: 0.01, Loss: 3.7355, Acc: 25.82%
+Round [ 28/200] - LR: 0.01, Loss: 3.8055, Acc: 25.41%
+Round [ 29/200] - LR: 0.01, Loss: 3.6174, Acc: 26.42%
+Round [ 30/200] - LR: 0.01, Loss: 3.6587, Acc: 26.91%
+Round [ 31/200] - LR: 0.01, Loss: 3.5054, Acc: 27.73%
+Round [ 32/200] - LR: 0.01, Loss: 3.6188, Acc: 27.63%
+Round [ 33/200] - LR: 0.01, Loss: 3.4638, Acc: 27.77%
+Round [ 34/200] - LR: 0.01, Loss: 3.4393, Acc: 27.97%
+Round [ 35/200] - LR: 0.01, Loss: 3.4759, Acc: 28.87%
+Round [ 36/200] - LR: 0.01, Loss: 3.3338, Acc: 28.14%
+Round [ 37/200] - LR: 0.01, Loss: 3.4785, Acc: 29.11%
+Round [ 38/200] - LR: 0.01, Loss: 3.5217, Acc: 28.55%
+Round [ 39/200] - LR: 0.01, Loss: 3.3805, Acc: 29.87%
+Round [ 40/200] - LR: 0.01, Loss: 3.3924, Acc: 29.61%
+Round [ 41/200] - LR: 0.01, Loss: 3.4704, Acc: 29.80%
+Round [ 42/200] - LR: 0.01, Loss: 3.3700, Acc: 30.00%
+Round [ 43/200] - LR: 0.01, Loss: 3.2741, Acc: 30.66%
+Round [ 44/200] - LR: 0.01, Loss: 3.2536, Acc: 29.76%
+Round [ 45/200] - LR: 0.01, Loss: 3.3161, Acc: 30.57%
+Round [ 46/200] - LR: 0.01, Loss: 3.2537, Acc: 31.17%
+Round [ 47/200] - LR: 0.01, Loss: 3.2570, Acc: 30.15%
+Round [ 48/200] - LR: 0.01, Loss: 3.3584, Acc: 31.33%
+Round [ 49/200] - LR: 0.01, Loss: 3.2711, Acc: 31.27%
+Round [ 50/200] - LR: 0.01, Loss: 3.1809, Acc: 32.07%
+Round [ 51/200] - LR: 0.01, Loss: 3.2439, Acc: 31.88%
+Round [ 52/200] - LR: 0.01, Loss: 3.2141, Acc: 31.65%
+Round [ 53/200] - LR: 0.01, Loss: 3.1316, Acc: 32.54%
+Round [ 54/200] - LR: 0.01, Loss: 3.2696, Acc: 32.06%
+Round [ 55/200] - LR: 0.01, Loss: 3.0998, Acc: 32.46%
+Round [ 56/200] - LR: 0.01, Loss: 3.1086, Acc: 32.51%
+Round [ 57/200] - LR: 0.01, Loss: 3.1689, Acc: 31.50%
+Round [ 58/200] - LR: 0.01, Loss: 3.1046, Acc: 32.73%
+Round [ 59/200] - LR: 0.01, Loss: 3.0870, Acc: 32.49%
+Round [ 60/200] - LR: 0.01, Loss: 3.0585, Acc: 32.96%
+Round [ 61/200] - LR: 0.01, Loss: 3.1408, Acc: 33.39%
+Round [ 62/200] - LR: 0.01, Loss: 3.1208, Acc: 33.34%
+Round [ 63/200] - LR: 0.01, Loss: 3.0164, Acc: 33.54%
+Round [ 64/200] - LR: 0.01, Loss: 3.0900, Acc: 32.50%
+Round [ 65/200] - LR: 0.01, Loss: 3.1480, Acc: 33.46%
+Round [ 66/200] - LR: 0.01, Loss: 3.1384, Acc: 33.47%
+Round [ 67/200] - LR: 0.01, Loss: 3.0561, Acc: 33.77%
+Round [ 68/200] - LR: 0.01, Loss: 3.1028, Acc: 33.77%
+Round [ 69/200] - LR: 0.01, Loss: 3.0220, Acc: 34.39%
+Round [ 70/200] - LR: 0.01, Loss: 3.0813, Acc: 34.55%
+Round [ 71/200] - LR: 0.01, Loss: 2.9900, Acc: 33.64%
+Round [ 72/200] - LR: 0.01, Loss: 3.0352, Acc: 33.21%
+Round [ 73/200] - LR: 0.01, Loss: 2.9504, Acc: 33.73%
+Round [ 74/200] - LR: 0.01, Loss: 3.0506, Acc: 34.09%
+Round [ 75/200] - LR: 0.01, Loss: 3.0823, Acc: 33.64%
+Round [ 76/200] - LR: 0.01, Loss: 2.9651, Acc: 33.94%
+Round [ 77/200] - LR: 0.01, Loss: 3.0149, Acc: 35.14%
+Round [ 78/200] - LR: 0.01, Loss: 2.9335, Acc: 34.75%
+Round [ 79/200] - LR: 0.01, Loss: 3.0627, Acc: 34.52%
+Round [ 80/200] - LR: 0.01, Loss: 3.0314, Acc: 34.47%
+Round [ 81/200] - LR: 0.01, Loss: 2.9927, Acc: 34.91%
+Round [ 82/200] - LR: 0.01, Loss: 2.9975, Acc: 34.60%
+Round [ 83/200] - LR: 0.01, Loss: 3.0064, Acc: 34.71%
+Round [ 84/200] - LR: 0.01, Loss: 2.9198, Acc: 34.95%
+Round [ 85/200] - LR: 0.01, Loss: 3.0467, Acc: 35.10%
+Round [ 86/200] - LR: 0.01, Loss: 2.9376, Acc: 35.71%
+Round [ 87/200] - LR: 0.01, Loss: 2.9143, Acc: 35.87%
+Round [ 88/200] - LR: 0.01, Loss: 2.9104, Acc: 35.06%
+Round [ 89/200] - LR: 0.01, Loss: 3.0608, Acc: 36.20%
+Round [ 90/200] - LR: 0.01, Loss: 2.9600, Acc: 35.69%
+Round [ 91/200] - LR: 0.01, Loss: 2.9875, Acc: 35.62%
+Round [ 92/200] - LR: 0.01, Loss: 3.0156, Acc: 35.52%
+Round [ 93/200] - LR: 0.01, Loss: 2.9460, Acc: 35.56%
+Round [ 94/200] - LR: 0.01, Loss: 2.8673, Acc: 36.45%
+Round [ 95/200] - LR: 0.01, Loss: 2.9423, Acc: 35.76%
+Round [ 96/200] - LR: 0.01, Loss: 2.9322, Acc: 36.13%
+Round [ 97/200] - LR: 0.01, Loss: 2.9287, Acc: 36.56%
+Round [ 98/200] - LR: 0.01, Loss: 2.9100, Acc: 36.05%
+Round [ 99/200] - LR: 0.01, Loss: 2.9384, Acc: 36.28%
+Round [100/200] - LR: 0.01, Loss: 2.7437, Acc: 36.71%
+Round [101/200] - LR: 0.001, Loss: 2.5683, Acc: 37.89%
+Round [102/200] - LR: 0.001, Loss: 2.5092, Acc: 36.82%
+Round [103/200] - LR: 0.001, Loss: 2.4866, Acc: 38.02%
+Round [104/200] - LR: 0.001, Loss: 2.4768, Acc: 38.18%
+Round [105/200] - LR: 0.001, Loss: 2.5551, Acc: 38.22%
+Round [106/200] - LR: 0.001, Loss: 2.5092, Acc: 37.85%
+Round [107/200] - LR: 0.001, Loss: 2.4945, Acc: 37.71%
+Round [108/200] - LR: 0.001, Loss: 2.4917, Acc: 37.37%
+Round [109/200] - LR: 0.001, Loss: 2.4579, Acc: 38.27%
+Round [110/200] - LR: 0.001, Loss: 2.6304, Acc: 38.50%
+Round [111/200] - LR: 0.001, Loss: 2.4971, Acc: 38.89%
+Round [112/200] - LR: 0.001, Loss: 2.4503, Acc: 38.74%
+Round [113/200] - LR: 0.001, Loss: 2.4854, Acc: 38.06%
+Round [114/200] - LR: 0.001, Loss: 2.4837, Acc: 38.35%
+Round [115/200] - LR: 0.001, Loss: 2.4694, Acc: 38.31%
+Round [116/200] - LR: 0.001, Loss: 2.4649, Acc: 38.67%
+Round [117/200] - LR: 0.001, Loss: 2.4638, Acc: 38.29%
+Round [118/200] - LR: 0.001, Loss: 2.5927, Acc: 38.93%
+Round [119/200] - LR: 0.001, Loss: 2.4564, Acc: 38.75%
+Round [120/200] - LR: 0.001, Loss: 2.5095, Acc: 38.14%
+Round [121/200] - LR: 0.001, Loss: 2.4069, Acc: 38.38%
+Round [122/200] - LR: 0.001, Loss: 2.4690, Acc: 38.45%
+Round [123/200] - LR: 0.001, Loss: 2.3536, Acc: 38.01%
+Round [124/200] - LR: 0.001, Loss: 2.5151, Acc: 38.78%
+Round [125/200] - LR: 0.001, Loss: 2.5626, Acc: 38.75%
+Round [126/200] - LR: 0.001, Loss: 2.5490, Acc: 38.46%
+Round [127/200] - LR: 0.001, Loss: 2.5471, Acc: 38.56%
+Round [128/200] - LR: 0.001, Loss: 2.5446, Acc: 38.81%
+Round [129/200] - LR: 0.001, Loss: 2.4793, Acc: 39.02%
+Round [130/200] - LR: 0.001, Loss: 2.4766, Acc: 38.81%
+Round [131/200] - LR: 0.001, Loss: 2.4558, Acc: 37.78%
+Round [132/200] - LR: 0.001, Loss: 2.4628, Acc: 38.03%
+Round [133/200] - LR: 0.001, Loss: 2.4819, Acc: 37.88%
+Round [134/200] - LR: 0.001, Loss: 2.4272, Acc: 38.32%
+Round [135/200] - LR: 0.001, Loss: 2.4830, Acc: 38.62%
+Round [136/200] - LR: 0.001, Loss: 2.5280, Acc: 38.65%
+Round [137/200] - LR: 0.001, Loss: 2.4445, Acc: 38.66%
+Round [138/200] - LR: 0.001, Loss: 2.3957, Acc: 38.90%
+Round [139/200] - LR: 0.001, Loss: 2.5456, Acc: 38.85%
+Round [140/200] - LR: 0.001, Loss: 2.5167, Acc: 38.51%
+Round [141/200] - LR: 0.001, Loss: 2.4495, Acc: 38.34%
+Round [142/200] - LR: 0.001, Loss: 2.5085, Acc: 38.31%
+Round [143/200] - LR: 0.001, Loss: 2.4434, Acc: 38.87%
+Round [144/200] - LR: 0.001, Loss: 2.4681, Acc: 38.24%
+Round [145/200] - LR: 0.001, Loss: 2.4516, Acc: 38.85%
+Round [146/200] - LR: 0.001, Loss: 2.4190, Acc: 38.32%
+Round [147/200] - LR: 0.001, Loss: 2.4816, Acc: 38.56%
+Round [148/200] - LR: 0.001, Loss: 2.4358, Acc: 38.38%
+Round [149/200] - LR: 0.001, Loss: 2.5220, Acc: 39.39%
+Round [150/200] - LR: 0.001, Loss: 2.4967, Acc: 38.78%
+Round [151/200] - LR: 0.0001, Loss: 2.5118, Acc: 38.66%
+Round [152/200] - LR: 0.0001, Loss: 2.5035, Acc: 38.58%
+Round [153/200] - LR: 0.0001, Loss: 2.4646, Acc: 38.29%
+Round [154/200] - LR: 0.0001, Loss: 2.4738, Acc: 39.30%
+Round [155/200] - LR: 0.0001, Loss: 2.5063, Acc: 39.38%
+Round [156/200] - LR: 0.0001, Loss: 2.4360, Acc: 38.46%
+Round [157/200] - LR: 0.0001, Loss: 2.5114, Acc: 39.53%
+Round [158/200] - LR: 0.0001, Loss: 2.5250, Acc: 39.19%
+Round [159/200] - LR: 0.0001, Loss: 2.4786, Acc: 38.57%
+Round [160/200] - LR: 0.0001, Loss: 2.4644, Acc: 38.78%
+Round [161/200] - LR: 0.0001, Loss: 2.4333, Acc: 38.59%
+Round [162/200] - LR: 0.0001, Loss: 2.4847, Acc: 38.39%
+Round [163/200] - LR: 0.0001, Loss: 2.4135, Acc: 38.48%
+Round [164/200] - LR: 0.0001, Loss: 2.5030, Acc: 38.93%
+Round [165/200] - LR: 0.0001, Loss: 2.4905, Acc: 39.12%
+Round [166/200] - LR: 0.0001, Loss: 2.5726, Acc: 38.34%
+Round [167/200] - LR: 0.0001, Loss: 2.3420, Acc: 38.56%
+Round [168/200] - LR: 0.0001, Loss: 2.3486, Acc: 38.10%
+Round [169/200] - LR: 0.0001, Loss: 2.5501, Acc: 39.00%
+Round [170/200] - LR: 0.0001, Loss: 2.4627, Acc: 38.47%
+Round [171/200] - LR: 0.0001, Loss: 2.4138, Acc: 39.12%
+Round [172/200] - LR: 0.0001, Loss: 2.4061, Acc: 38.81%
+Round [173/200] - LR: 0.0001, Loss: 2.5298, Acc: 38.53%
+Round [174/200] - LR: 0.0001, Loss: 2.5044, Acc: 38.71%
+Round [175/200] - LR: 0.0001, Loss: 2.5275, Acc: 38.75%
+Round [176/200] - LR: 0.0001, Loss: 2.3778, Acc: 39.14%
+Round [177/200] - LR: 0.0001, Loss: 2.5763, Acc: 38.54%
+Round [178/200] - LR: 0.0001, Loss: 2.4455, Acc: 38.89%
+Round [179/200] - LR: 0.0001, Loss: 2.4823, Acc: 39.31%
+Round [180/200] - LR: 0.0001, Loss: 2.4000, Acc: 39.14%
+Round [181/200] - LR: 0.0001, Loss: 2.4531, Acc: 39.19%
+Round [182/200] - LR: 0.0001, Loss: 2.5263, Acc: 38.67%
+Round [183/200] - LR: 0.0001, Loss: 2.3577, Acc: 38.65%
+Round [184/200] - LR: 0.0001, Loss: 2.4879, Acc: 38.84%
+Round [185/200] - LR: 0.0001, Loss: 2.5057, Acc: 38.64%
+Round [186/200] - LR: 0.0001, Loss: 2.5345, Acc: 38.66%
+Round [187/200] - LR: 0.0001, Loss: 2.4145, Acc: 38.94%
+Round [188/200] - LR: 0.0001, Loss: 2.5252, Acc: 39.34%
+Round [189/200] - LR: 0.0001, Loss: 2.4307, Acc: 39.00%
+Round [190/200] - LR: 0.0001, Loss: 2.4930, Acc: 38.41%
+Round [191/200] - LR: 0.0001, Loss: 2.3630, Acc: 39.20%
+Round [192/200] - LR: 0.0001, Loss: 2.4909, Acc: 38.69%
+Round [193/200] - LR: 0.0001, Loss: 2.5020, Acc: 38.60%
+Round [194/200] - LR: 0.0001, Loss: 2.5369, Acc: 38.74%
+Round [195/200] - LR: 0.0001, Loss: 2.4882, Acc: 38.26%
+Round [196/200] - LR: 0.0001, Loss: 2.3060, Acc: 39.11%
+Round [197/200] - LR: 0.0001, Loss: 2.5370, Acc: 37.95%
+Round [198/200] - LR: 0.0001, Loss: 2.3721, Acc: 39.13%
+Round [199/200] - LR: 0.0001, Loss: 2.4224, Acc: 38.89%
+Round [200/200] - LR: 0.0001, Loss: 2.4548, Acc: 38.46%

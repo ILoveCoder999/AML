@@ -1,0 +1,60 @@
+Using device: cuda
+Files already downloaded and verified
+Files already downloaded and verified
+Files already downloaded and verified
+IID partiton of 100 clients
+
+Using cache found in /home/xi/.cache/torch/hub/facebookresearch_dino_main
+/home/xi/miniconda3/envs/torch_env/lib/python3.10/site-packages/torch/cuda/__init__.py:716: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Starting FedAvg: N=100, C=0.1, J=4
+Round [1/50] - Avg Loss: 7.9695, Test Acc: 3.04%
+Round [2/50] - Avg Loss: 6.3987, Test Acc: 8.15%
+Round [3/50] - Avg Loss: 5.5249, Test Acc: 13.98%
+Round [4/50] - Avg Loss: 4.8457, Test Acc: 20.09%
+Round [5/50] - Avg Loss: 4.3433, Test Acc: 25.79%
+Round [6/50] - Avg Loss: 4.0341, Test Acc: 29.86%
+Round [7/50] - Avg Loss: 3.7540, Test Acc: 34.29%
+Round [8/50] - Avg Loss: 3.3751, Test Acc: 35.82%
+Round [9/50] - Avg Loss: 3.2057, Test Acc: 39.11%
+Round [10/50] - Avg Loss: 2.9900, Test Acc: 42.12%
+Round [11/50] - Avg Loss: 2.8953, Test Acc: 44.87%
+Round [12/50] - Avg Loss: 2.7745, Test Acc: 45.80%
+Round [13/50] - Avg Loss: 2.6055, Test Acc: 47.80%
+Round [14/50] - Avg Loss: 2.5658, Test Acc: 47.98%
+Round [15/50] - Avg Loss: 2.5141, Test Acc: 49.46%
+Round [16/50] - Avg Loss: 2.4466, Test Acc: 50.70%
+Round [17/50] - Avg Loss: 2.3822, Test Acc: 52.24%
+Round [18/50] - Avg Loss: 2.2226, Test Acc: 52.47%
+Round [19/50] - Avg Loss: 2.2585, Test Acc: 52.43%
+Round [20/50] - Avg Loss: 2.2084, Test Acc: 53.03%
+Round [21/50] - Avg Loss: 2.1212, Test Acc: 53.78%
+Round [22/50] - Avg Loss: 1.9746, Test Acc: 55.21%
+Round [23/50] - Avg Loss: 2.0555, Test Acc: 56.68%
+Round [24/50] - Avg Loss: 2.0362, Test Acc: 56.94%
+Round [25/50] - Avg Loss: 1.9129, Test Acc: 56.88%
+Round [26/50] - Avg Loss: 1.9185, Test Acc: 58.21%
+Round [27/50] - Avg Loss: 1.8480, Test Acc: 57.94%
+Round [28/50] - Avg Loss: 1.9421, Test Acc: 59.20%
+Round [29/50] - Avg Loss: 1.8481, Test Acc: 58.69%
+Round [30/50] - Avg Loss: 1.8554, Test Acc: 59.84%
+Round [31/50] - Avg Loss: 1.7941, Test Acc: 59.80%
+Round [32/50] - Avg Loss: 1.6679, Test Acc: 60.12%
+Round [33/50] - Avg Loss: 1.7095, Test Acc: 60.42%
+Round [34/50] - Avg Loss: 1.7764, Test Acc: 60.62%
+Round [35/50] - Avg Loss: 1.7884, Test Acc: 61.60%
+Round [36/50] - Avg Loss: 1.7686, Test Acc: 60.85%
+Round [37/50] - Avg Loss: 1.6754, Test Acc: 61.44%
+Round [38/50] - Avg Loss: 1.6954, Test Acc: 62.20%
+Round [39/50] - Avg Loss: 1.6543, Test Acc: 61.75%
+Round [40/50] - Avg Loss: 1.6112, Test Acc: 62.23%
+Round [41/50] - Avg Loss: 1.7354, Test Acc: 62.05%
+Round [42/50] - Avg Loss: 1.6340, Test Acc: 63.51%
+Round [43/50] - Avg Loss: 1.5435, Test Acc: 63.27%
+Round [44/50] - Avg Loss: 1.6545, Test Acc: 63.68%
+Round [45/50] - Avg Loss: 1.6095, Test Acc: 64.14%
+Round [46/50] - Avg Loss: 1.6218, Test Acc: 63.51%
+Round [47/50] - Avg Loss: 1.5933, Test Acc: 64.41%
+Round [48/50] - Avg Loss: 1.5534, Test Acc: 64.07%
+Round [49/50] - Avg Loss: 1.5377, Test Acc: 64.92%
+Round [50/50] - Avg Loss: 1.5108, Test Acc: 64.75%
