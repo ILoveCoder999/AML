@@ -29,16 +29,21 @@ class FederatedLearningDataset:
         #Standardization processing, convert to tensors, normalization
         #Original image 32*32 pixels->224*224
         #(Higth,Width,Channels(RGB))
-        self.transforms=transforms.Compose([
-                 transforms.Resize((224,224)),
+        self.train_transforms=transforms.Compose([
+                 transforms.Resize(256),
+                 transforms.RandomCrop(224),
+                 transforms.RandomHorizontalFlip(),
                  transforms.ToTensor(),
                  transforms.Normalize((0.485, 0.456, 0.406),(0.229, 0.224, 0.225))
                 ]
-            )
-        #Temporary dataset, not normalized
-        temp_dataset = torchvision.datasets.CIFAR100(
-            root=self.root, train=True, download=True, transform=self.transforms
         )
+        self.test_transforms = transforms.Compose([
+            transforms.Resize(256),
+            transforms.CenterCrop(224),  # 测试时只取最中心的部分
+            transforms.ToTensor(),
+            transforms.Normalize((0.5071, 0.4867, 0.4408), (0.2675, 0.2565, 0.2761))
+        ])
+
 
         #default: training vs test = 50 000 : 10 000,5:1
         #The entire training set, including the training set and the validation set,Random seeds ensure reproducibility
@@ -46,7 +51,7 @@ class FederatedLearningDataset:
             root=self.root,
             train=True,
             download=True,
-            transform=self.transforms
+            transform=self.train_transforms
         ) 
 
         # testdataset 
@@ -56,7 +61,7 @@ class FederatedLearningDataset:
             root=self.root,
             train=False,
             download=True,
-            transform=self.transforms
+            transform=self.test_transforms
         )
 
         #create train-validation split

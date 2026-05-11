@@ -3,11 +3,11 @@ import torch.nn as nn
 import torch.optim as optim
 import matplotlib.pyplot as plt
 import numpy as np
-import os
 import json
-from datetime import datetime
 from datapreprocessing import FederatedLearningDataset
 from torch.utils.data import DataLoader
+import itertools
+from torch.optim.lr_scheduler import LambdaLR
 
 class CentralizedModel(nn.Module):
     #During training, 10% of neurons are randomly stop
@@ -45,7 +45,7 @@ class CentralizedModel(nn.Module):
 '''
 learning rate scheduler
 '''
-from torch.optim.lr_scheduler import LambdaLR
+
 def learnrated_schedule(optimizer, warmup_epochs=5, total_epochs=30):
     def learningrate_lambda(epoch):
         # 1. Linear Warmup Phase
@@ -116,7 +116,7 @@ def train_one_epoch(model,loader,criterion,optimizer,device):
     accuracy = 100. * correct / total
     return avg_loss, accuracy
 
-#validationSet,Testset
+#validationSet,Test set
 def evaluate(model, loader, criterion, device):
     #close dropout ensure same input get same output
     model.eval()
@@ -139,9 +139,6 @@ def evaluate(model, loader, criterion, device):
     avg_loss = running_loss / len(loader)
     accuracy = 100. * correct / total
     return avg_loss, accuracy
-    
-
-
 
 def run_centralized_baseline(hyperparameters=None,seed=42):
     torch.manual_seed(seed)
@@ -233,7 +230,64 @@ def run_centralized_baseline(hyperparameters=None,seed=42):
     print(f"Test Accuracy: {test_acc:.2f}%")
 
     
-    return model, history, test_acc
+    return model, history, best_val_acc
+
+
+def hyperparameter_search(seed=42):
+    """
+    Grid Search:Find best hyperparameters。
+    Iterate through the defined parameter space
+    return the parameter combination
+    that performs best on the test set.
+    """
+    print("=" * 50)
+    print("Start Hyperparameter Grid Search:")
+    print("=" * 50)
+
+
+    search_space = {
+        'lr': [0.001, 0.0001],
+        'batch_size': [64, 128],
+        'weight_decay': [1e-4, 5e-4]
+    }
+
+    base_hyperparameters = {
+        'epochs': 15,  # When searching, you can run only 15 rounds to get a general trend.
+        'momentum': 0.9,
+        'dropout_rate': 0.1,
+        'warmup_epochs': 3,
+    }
+
+    # Cartesian product generates all possible combinations
+    keys, values = zip(*search_space.items())
+    combinations = [dict(zip(keys, v)) for v in itertools.product(*values)]
+
+    best_acc = 0.0
+    best_params = None
+
+    # 4. Train by traversing all combinations
+    for i, combo in enumerate(combinations):
+        print(f"\n[Search {i + 1}/{len(combinations)}] Testing combinations: {combo}")
+
+        # combination dynamic parameters and static parameters
+        current_hp = base_hyperparameters.copy()
+        current_hp.update(combo)
+
+        # run training pipeline
+        _, _, val_acc = run_centralized_baseline(hyperparameters=current_hp, seed=seed)
+
+        # record best result
+        if val_acc > best_acc:
+            best_acc = val_acc
+            best_params = current_hp.copy()
+
+    print("\n" + "=" * 50)
+    print("hyperparameter search finished")
+    print(f"best hyperparameter accuracy rate:{best_acc:.2f}%")
+    print(f"best hyperparameter combination: {best_params}")
+    print("=" * 50)
+
+    return best_params
 
 def plot_training_curves(history):
 
@@ -264,7 +318,16 @@ def plot_training_curves(history):
 
 
 if __name__ == "__main__":
-    hyperparameters = {
+    '''
+    print("---hint:if you need to repeat hyperparameter search,please cancel below code comment")
+    best_params = hyperparameter_search(seed=42)
+    print("Please update best hyperparameters above output  into optimal_hyperparameters")
+    optimal_hyperparameters = best_params
+    import sys;
+    sys.exit()
+    '''
+
+    optimal_hyperparameters = {
         'batch_size': 128,
         'epochs': 30,          
         'lr': 0.0001,         
@@ -274,7 +337,7 @@ if __name__ == "__main__":
         'warmup_epochs': 5,
     }
     
-    model, history, test_acc = run_centralized_baseline(hyperparameters=hyperparameters, seed=42)
+    model, history, test_acc = run_centralized_baseline(hyperparameters=optimal_hyperparameters, seed=42)
     
     
     with open('training_history.json', 'w') as f:
@@ -285,3 +348,4 @@ if __name__ == "__main__":
     print(f"\ntrain_history 'training_history.json'")
   
     print(f"best_centralized_model'best_centralized_model.pth'")
+    plot_training_curves(history)
