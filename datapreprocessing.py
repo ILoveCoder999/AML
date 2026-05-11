@@ -113,7 +113,7 @@ class FederatedLearningDataset:
         total_train_dataset_index=np.arange(len(self.train_dataset))
         #get all sample real label
         total_train_labels=self.train_targets
-        #Stack the indices and labels vertically to form a 2 × N matrix. 
+        #Stack the indices and labels vertically to form a 2 × N matrix.
         # The first row : indices, and the second row : the corresponding labels.
         total_train_dataset_index_labels=np.vstack((total_train_dataset_index,total_train_labels))
         #matrix slicing Numpy:fancy indexing and vector opertation
@@ -126,10 +126,10 @@ class FederatedLearningDataset:
         2. Create Shards 
         '''
         # Total number of shards = (Number of clients) * (Shards per client)
-        total_shards = self.N * self.C
+        total_shards = int(self.N * self.C)
 
         # Number of samples in each shard
-        shards_size = int(len(self.train_dataset) / total_shards)
+        shards_size = int(len(self.train_dataset) // total_shards)
 
         # 1. Initialize an empty list to store the results
         index_shard = []
@@ -139,13 +139,13 @@ class FederatedLearningDataset:
             # Calculate the starting and ending positions for the current shard
             start = i * shards_size
             end = (i + 1) * shards_size
-            
+
             # Slice a portion of the sorted indices (one shard)
             current_shard = order_index[start:end]
-            
+
             # CRITICAL: Append the shard to the list to keep all shards (prevents overwriting)
             index_shard.append(current_shard)
-           
+
 
         '''
         3. Assign Shards to Clients
@@ -155,20 +155,20 @@ class FederatedLearningDataset:
         # Client ID:Value: NumPy array of sample indices.
 
         dict_clients = {i: np.array([], dtype='int64') for i in range(self.N)}
-        
+
         # Create a pool  as available shard indices [0, 1, 2, ..., total_shards-1].
         tmp_shards = list(range(total_shards))
-        
+
         # Iterate through each client to assign data.
         for i in range(self.N):
             # Each client randomly picks 'self.C' shards from the pool.
             for _ in range(self.C):
                 # Randomly select one shard index from pool.
                 shard_index = np.random.choice(tmp_shards)
-                
+
                 # Concatenate the selected shard's data indices into the client's array.
                 dict_clients[i] = np.concatenate((dict_clients[i], index_shard[shard_index]))
-                
+
                 # Remove the selected shard from the pool to ensure it isn't picked again.
                 # This guarantees that each shard is assigned to exactly one client.
                 tmp_shards.remove(shard_index)
@@ -178,7 +178,7 @@ class FederatedLearningDataset:
 
 
         
-# 执行测试
+# execute code
 if __name__ == "__main__":
     print(f"Pytorch version: {torch.__version__}")
     print(f"Cuda available: {torch.cuda.is_available()}")
