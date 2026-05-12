@@ -39,9 +39,9 @@ class FederatedLearningDataset:
         )
         self.test_transforms = transforms.Compose([
             transforms.Resize(256),
-            transforms.CenterCrop(224),  # 测试时只取最中心的部分
+            transforms.CenterCrop(224),
             transforms.ToTensor(),
-            transforms.Normalize((0.5071, 0.4867, 0.4408), (0.2675, 0.2565, 0.2761))
+            transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
         ])
 
 
@@ -54,7 +54,7 @@ class FederatedLearningDataset:
             transform=self.train_transforms
         ) 
 
-        # testdataset 
+        # test dataset
         # Stored on a central server, it cannot be viewed during training;
         # the final test results are also check.
         self.test_dataset=torchvision.datasets.CIFAR100(
@@ -82,7 +82,7 @@ class FederatedLearningDataset:
       
     
     def iid_partition(self):
-        print(f"IID partiton of {self.N} clients")
+        print(f"IID partition of {self.N} clients")
         print()
         dataset_per_client=int(len(self.train_dataset)/self.N)
         #Initialize an empty dictionary to store the results.
@@ -104,49 +104,33 @@ class FederatedLearningDataset:
     # Finally, each client randomly selects Nc shards. 
     # each client only has data from a few classes,  Non-IID (non-independent and identically distributed) data.
     def non_iid_partition(self, num_classes_per_client=None):
-        """
-        Non-IID partitioning logic based on shards.
-        Each client is given training samples belonging to Nc classes[cite: 44].
-        """
-        # If no Nc is passed, use the default from __init__
+        #the number of class per clients
         Nc = num_classes_per_client if num_classes_per_client is not None else self.C
-        print(f"Non-IID partition (Nc={Nc}) for {self.N} clients")
 
-        # 1. Order indices by labels (Standard shard-based approach)
         total_indices = np.arange(len(self.train_dataset))
         labels = self.train_targets
 
-        # Sort indices based on their corresponding labels
         ordered_indices = total_indices[np.argsort(labels)]
 
-        # 2. Define Shard Structure
-        # To satisfy Nc classes per client, we divide into N * Nc shards [cite: 44, 45]
         total_shards = int(self.N * Nc)
         samples_per_shard = len(ordered_indices) // total_shards
 
-        # 3. Create Shards List
-        index_shard = []
+        # 创建 shards
+        shards = []
         for i in range(total_shards):
             start = i * samples_per_shard
-            # For the very last shard, take all remaining samples to avoid data loss
             end = (i + 1) * samples_per_shard if i < total_shards - 1 else len(ordered_indices)
-            index_shard.append(ordered_indices[start:end])
+            shards.append(ordered_indices[start:end])
 
-        # 4. Assign Shards to Clients
-        dict_clients = {i: np.array([], dtype='int64') for i in range(self.N)}
-        available_shards = list(range(total_shards))
+        # 随机分配 shards 给 clients
+        shard_indices = np.random.permutation(total_shards)
+        dict_clients = {}
 
         for i in range(self.N):
-            # Each client randomly picks Nc shards from the pool [cite: 44]
-            selected_shard_indices = np.random.choice(available_shards, int(Nc), replace=False)
-
-            for shard_idx in selected_shard_indices:
-                dict_clients[i] = np.concatenate((dict_clients[i], index_shard[shard_idx]))
-                # Remove from pool so no two clients share the same shard
-                available_shards.remove(shard_idx)
+            client_shards = shard_indices[i * Nc:(i + 1) * Nc]
+            dict_clients[i] = np.concatenate([shards[idx] for idx in client_shards])
 
         return dict_clients
-
 
         
 # execute code

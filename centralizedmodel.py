@@ -8,6 +8,7 @@ from datapreprocessing import FederatedLearningDataset
 from torch.utils.data import DataLoader
 import itertools
 from torch.optim.lr_scheduler import LambdaLR
+import os
 
 class CentralizedModel(nn.Module):
     #During training, 10% of neurons are randomly stop
@@ -197,7 +198,7 @@ def run_centralized_baseline(hyperparameters=None,seed=42):
             
             # 手动调低基础学习率，防止剧烈震荡破坏预训练特征
             for param_group in optimizer.param_groups:
-                param_group['lr'] = 1e-5 
+                param_group['lr'] = param_group['lr'] * 0.1
         # -----------------------------
         # Train for one epoch
         t_loss, t_acc = train_one_epoch(model, train_loader, criterion,
@@ -252,7 +253,7 @@ def hyperparameter_search(seed=42):
     }
 
     base_hyperparameters = {
-        'epochs': 15,  # When searching, you can run only 15 rounds to get a general trend.
+        'epochs': 30,
         'momentum': 0.9,
         'dropout_rate': 0.1,
         'warmup_epochs': 3,
@@ -264,6 +265,9 @@ def hyperparameter_search(seed=42):
 
     best_acc = 0.0
     best_params = None
+    output_dir = './hyperparameter_search_results'
+    os.makedirs(output_dir, exist_ok=True)
+    results_log=[]
 
     # 4. Train by traversing all combinations
     for i, combo in enumerate(combinations):
@@ -287,6 +291,29 @@ def hyperparameter_search(seed=42):
     print(f"best hyperparameter combination: {best_params}")
     print("=" * 50)
 
+    # --- SAVE TO FILES ---
+    # 1. Save all trial history
+    history_path = os.path.join(output_dir, 'search_history.json')
+    with open(history_path, 'w') as f:
+        json.dump(results_log, f, indent=4)
+
+    # 2. Save only the best parameters
+    best_path = os.path.join(output_dir, 'best_hyperparameters.json')
+    with open(best_path, 'w') as f:
+        json.dump(best_params, f, indent=4)
+
+    # --- FINAL SUMMARY TABLE ---
+    print("\n" + "=" * 70)
+    print(f"{'Trial':<8} | {'LR':<10} | {'Batch':<8} | {'WD':<10} | {'Val Acc (%)':<12}")
+    print("-" * 70)
+    for res in results_log:
+        print(
+            f"{res['trial']:<8} | {res['lr']:<10.4f} | {res['batch_size']:<8} | {res['weight_decay']:<10.1e} | {res['val_acc']:<12.2f}")
+
+    print("-" * 70)
+    print(f" Search complete. Results saved to '{output_dir}/'")
+    print(f" Best Accuracy: {best_acc:.2f}%")
+    print("=" * 70 + "\n")
     return best_params
 
 def plot_training_curves(history):
@@ -318,14 +345,11 @@ def plot_training_curves(history):
 
 
 if __name__ == "__main__":
-    '''
+
     print("---hint:if you need to repeat hyperparameter search,please cancel below code comment")
     best_params = hyperparameter_search(seed=42)
     print("Please update best hyperparameters above output  into optimal_hyperparameters")
     optimal_hyperparameters = best_params
-    import sys;
-    sys.exit()
-    '''
 
     optimal_hyperparameters = {
         'batch_size': 128,

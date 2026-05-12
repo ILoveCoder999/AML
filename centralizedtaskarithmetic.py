@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-import json
 from torch.utils.data import DataLoader
 # Reuse existing components
 from centralizedmodel import CentralizedModel, evaluate, learnrated_schedule
