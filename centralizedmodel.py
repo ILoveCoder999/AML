@@ -6,9 +6,22 @@ import numpy as np
 import json
 from datapreprocessing import FederatedLearningDataset
 from torch.utils.data import DataLoader
-import itertools
 from torch.optim.lr_scheduler import LambdaLR
-import os
+from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts
+
+class LabelSmoothingCrossEntropy(nn.Module):
+    def __init__(self, smoothing=0.1):
+        super(LabelSmoothingCrossEntropy, self).__init__()
+        self.smoothing = smoothing
+
+    def forward(self, pred, target):
+        n_classes = pred.size(1)
+        log_probs = torch.log_softmax(pred, dim=1)
+        with torch.no_grad():
+            true_dist = torch.zeros_like(pred)
+            true_dist.fill_(self.smoothing / (n_classes - 1))
+            true_dist.scatter_(1, target.unsqueeze(1), 1 - self.smoothing)
+        return torch.mean(torch.sum(-true_dist * log_probs, dim=1))
 
 class CentralizedModel(nn.Module):
     #During training, 10% of neurons are randomly stop
@@ -43,10 +56,7 @@ class CentralizedModel(nn.Module):
         features=self.dropout(features)
         return self.head(features)
 
-'''
-learning rate scheduler
-'''
-
+#learning rate scheduler
 def learnrated_schedule(optimizer, warmup_epochs=5, total_epochs=30):
     def learningrate_lambda(epoch):
         # 1. Linear Warmup Phase
@@ -117,7 +127,7 @@ def train_one_epoch(model,loader,criterion,optimizer,device):
     accuracy = 100. * correct / total
     return avg_loss, accuracy
 
-#validationSet,Test set
+#validate set,test set,evaluate
 def evaluate(model, loader, criterion, device):
     #close dropout ensure same input get same output
     model.eval()
@@ -149,16 +159,7 @@ def run_centralized_baseline(hyperparameters=None,seed=42):
     print(f"Using Device:{Device}")
     print(f"seed:{seed}")
     #first train set hyperparameters
-    if hyperparameters is None:
-        hyperparameters={
-            'batch_size': 128,
-            'epochs': 50,
-            'lr': 0.0001,
-            'momentum': 0.9,
-            'weight_decay': 5e-4,
-            'dropout_rate': 0.1,
-            'warmup_epochs': 5,
-        }
+
     BATCH_SIZE = hyperparameters['batch_size']
     EPOCHS = hyperparameters['epochs']
     LR = hyperparameters['lr']
@@ -166,6 +167,7 @@ def run_centralized_baseline(hyperparameters=None,seed=42):
     WEIGHT_DECAY = hyperparameters['weight_decay']
     DROPOUT_RATE = hyperparameters['dropout_rate']
     WARMUP_EPOCHS = hyperparameters['warmup_epochs']
+
     fld = FederatedLearningDataset(N=10, C=2)
     train_dataset = fld.train_dataset   
     val_dataset = fld.val_dataset       
@@ -178,11 +180,9 @@ def run_centralized_baseline(hyperparameters=None,seed=42):
     val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE,  shuffle=False, num_workers=4,pin_memory=True)
     test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=4,pin_memory=True)
     model=CentralizedModel(num_classes=100,dropout_rate=DROPOUT_RATE).to(Device)
-    optimizer = optim.SGD(model.parameters(), lr=LR, momentum=MOMENTUM,
-                         weight_decay=WEIGHT_DECAY)
-    criterion = nn.CrossEntropyLoss()
-    scheduler = learnrated_schedule(optimizer, warmup_epochs=WARMUP_EPOCHS,
-                               total_epochs=EPOCHS)
+    optimizer = optim.SGD(model.parameters(), lr=LR, momentum=MOMENTUM, weight_decay=WEIGHT_DECAY)
+    criterion = LabelSmoothingCrossEntropy(smoothing=0.1)
+    scheduler = learnrated_schedule(optimizer, warmup_epochs=WARMUP_EPOCHS, total_epochs=EPOCHS)
     print(f"Starting centralized training for {EPOCHS} epochs...")
     print(f"Hyperparameters: LR={LR}, Batch={BATCH_SIZE}, WD={WEIGHT_DECAY}")
     #start epoch=0,1,2,3...
@@ -190,15 +190,15 @@ def run_centralized_baseline(hyperparameters=None,seed=42):
     best_val_acc = 0.0
     history = {'train_loss': [], 'train_acc': [], 'val_loss': [], 'val_acc': []}
     for epoch in range(i, EPOCHS):
-        # --- 重点：在这里加入解冻逻辑 ---
+        # 简化解冻策略：只在epoch 20解冻一次，并降低学习率
         if epoch == 20:
-            print(">>> Epoch 20: Unfreezing the backbone for fine-tuning...")
+            print(f">>> Epoch {20}: Unfreezing the backbone for fine-tuning...")
             for param in model.backbone.parameters():
                 param.requires_grad = True
-            
-            # 手动调低基础学习率，防止剧烈震荡破坏预训练特征
+            # 降低整体学习率
             for param_group in optimizer.param_groups:
                 param_group['lr'] = param_group['lr'] * 0.1
+            print(f">>> Learning rate reduced to {optimizer.param_groups[0]['lr']:.6f}")
         # -----------------------------
         # Train for one epoch
         t_loss, t_acc = train_one_epoch(model, train_loader, criterion,
@@ -233,7 +233,7 @@ def run_centralized_baseline(hyperparameters=None,seed=42):
     
     return model, history, best_val_acc
 
-
+'''
 def hyperparameter_search(seed=42):
     """
     Grid Search:Find best hyperparameters。
@@ -315,7 +315,7 @@ def hyperparameter_search(seed=42):
     print(f" Best Accuracy: {best_acc:.2f}%")
     print("=" * 70 + "\n")
     return best_params
-
+'''
 def plot_training_curves(history):
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 4))
@@ -339,37 +339,38 @@ def plot_training_curves(history):
     axes[1].grid(True)
     
     plt.tight_layout()
-    plt.savefig('training_curves.png', dpi=300)
+    plt.savefig('centralized_model_training_curves.png', dpi=300)
     plt.show()
-    print("The training curve has been saved as 'training_curves.png'")
+    print("The training curve has been saved as 'centralized_model_training_curves.png'")
 
 
 if __name__ == "__main__":
-
+    '''
     print("---hint:if you need to repeat hyperparameter search,please cancel below code comment")
     best_params = hyperparameter_search(seed=42)
     print("Please update best hyperparameters above output  into optimal_hyperparameters")
     optimal_hyperparameters = best_params
-
+    '''
     optimal_hyperparameters = {
         'batch_size': 128,
-        'epochs': 30,          
-        'lr': 0.0001,         
+        'epochs': 40,
+        'lr': 0.001,
         'momentum': 0.9,
         'weight_decay': 5e-4,
         'dropout_rate': 0.1,
         'warmup_epochs': 5,
+
     }
     
     model, history, test_acc = run_centralized_baseline(hyperparameters=optimal_hyperparameters, seed=42)
     
     
-    with open('training_history.json', 'w') as f:
+    with open('centralizedmodel_training_history.json', 'w') as f:
         # numpy->Python type
         json_history = {k: [float(x) for x in v] for k, v in history.items()}
         json.dump(json_history, f, indent=2)
     
-    print(f"\ntrain_history 'training_history.json'")
+    print(f"\ntrain_history 'centralizedmodel_training_history.json'")
   
     print(f"best_centralized_model'best_centralized_model.pth'")
     plot_training_curves(history)

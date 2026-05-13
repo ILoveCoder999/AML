@@ -31,15 +31,16 @@ class FederatedLearningDataset:
         #(Higth,Width,Channels(RGB))
         self.train_transforms=transforms.Compose([
                  transforms.Resize(256),
-                 transforms.RandomCrop(224),
-                 transforms.RandomHorizontalFlip(),
+                 transforms.RandomResizedCrop(224, scale=(0.8, 1.0)),  # 随机缩放裁剪
+                 transforms.RandomHorizontalFlip(p=0.5),
+                 transforms.RandomRotation(15),  # 随机旋转
+                 transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2),  # 颜色抖动
                  transforms.ToTensor(),
                  transforms.Normalize((0.485, 0.456, 0.406),(0.229, 0.224, 0.225))
                 ]
         )
         self.test_transforms = transforms.Compose([
             transforms.Resize(256),
-            transforms.CenterCrop(224),
             transforms.ToTensor(),
             transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
         ])

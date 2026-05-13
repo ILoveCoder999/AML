@@ -105,8 +105,8 @@ def run_fedavg_experiment():
     C = 0.1           # Participation rate--randomly selected 10 clients for training in each round.
     J = 4             # local steps
     #The complete process of "distribution -> training -> uploading -> aggregation" needs to be repeated 50 times.
-    ROUNDS = 50       # communication round
-    BATCH_SIZE = 32
+    ROUNDS = 200      # communication round
+    BATCH_SIZE = 64
     LR = 0.01
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")

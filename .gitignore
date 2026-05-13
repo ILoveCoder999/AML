@@ -1,0 +1,11 @@
+*.tar.gz
+# 排除数据集目录和压缩包
+cifar-100-python/
+cifar-100-python.tar.gz
+
+# 排除所有 PyTorch 模型权重文件
+*.pth
+
+# 排除 Python 缓存
+__pycache__/
+
