@@ -107,7 +107,7 @@ def run_fedavg_experiment():
     #The complete process of "distribution -> training -> uploading -> aggregation" needs to be repeated 50 times.
     ROUNDS = 200      # communication round
     BATCH_SIZE = 128
-    LR = 0.1
+    LR = 0.01
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
@@ -125,13 +125,17 @@ def run_fedavg_experiment():
     print(f"Starting FedAvg: N={N}, C={C}, J={J}")
 
     for r in range(ROUNDS):
-        # --- 添加解冻逻辑 ---
-        if r == 100:
-            print(f">>> Round {r}: Unfreezing the backbone for fine-tuning...")
+        if r == 50:
+            print(f"\n>>> Round {r + 1}: Unfreezing the backbone for fine-tuning! <<<")
             for param in global_model.backbone.parameters():
                 param.requires_grad = True
-            LR = LR * 0.1  # 同步降低学习率，防止破坏预训练权重
-        # --------------------
+
+            # [补偿策略 4]: 配合拉长的轮数做学习率衰减
+        current_lr = LR
+        if r >= 100:
+            current_lr = LR * 0.1  # 第200轮降为 0.0001
+        if r >= 150:
+            current_lr = LR * 0.01  # 第300轮降为 0.00001
         local_weights = [] #collect model weight (all participating clients the round)
         m = int(C * N) # selected the number of clients every round
         #select m from N,build []
