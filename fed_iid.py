@@ -6,7 +6,7 @@ import copy
 from torch.utils.data import DataLoader, Subset
 from centralizedmodel import CentralizedModel, evaluate
 from datapreprocessing import FederatedLearningDataset
-
+import json
 #Federated_learning independent and identically distributed
 def train_local(model, dataset_indices, full_dataset, epochs, batch_size, lr, momentum, weight_decay, device):
     """
@@ -124,13 +124,16 @@ def run_fedavg_experiment():
 
     print(f"Starting FedAvg: N={N}, C={C}, J={J}")
 
+    history = {
+        'train_loss': [],
+        'test_loss': [],
+        'test_acc': []
+    }
     for r in range(ROUNDS):
         if r == 50:
             print(f"\n>>> Round {r + 1}: Unfreezing the backbone for fine-tuning! <<<")
             for param in global_model.backbone.parameters():
                 param.requires_grad = True
-
-            # [补偿策略 4]: 配合拉长的轮数做学习率衰减
         current_lr = LR
         if r >= 100:
             current_lr = LR * 0.1  # 第200轮降为 0.0001
@@ -153,7 +156,7 @@ def run_fedavg_experiment():
                 full_dataset=fld.train_dataset,
                 epochs=1,
                 batch_size=BATCH_SIZE,
-                lr=LR,
+                lr=current_lr,
                 momentum=0.9,
                 weight_decay=5e-4,
                 device=device
@@ -168,7 +171,16 @@ def run_fedavg_experiment():
         # An evaluation is conducted at the end of each round.
         test_loss, test_acc = evaluate(global_model, test_loader, criterion, device)
         print(f"Round [{r + 1}/{ROUNDS}] - Train Loss: {round_loss / m:.4f}, Test Loss: {test_loss:.4f}, Test Acc: {test_acc:.2f}%")
-        
+
+        #  将这一轮的数据存入字典
+        history['train_loss'].append(float(round_loss))
+        history['test_loss'].append(float(test_loss))
+        history['test_acc'].append(float(test_acc))
+
+        output_filename = 'fedavg_training_history.json'
+        with open(output_filename, 'w') as f:
+            json.dump(history, f, indent=4)
+        print(f"\n>>> 训练完成！所有历史数据已保存至 {output_filename}")
         # checkpoint
         if (r + 1) % 10 == 0:
             torch.save(global_model.state_dict(), f'fedavg_checkpoint_r{r+1}.pth')
