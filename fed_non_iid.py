@@ -8,19 +8,25 @@ from datapreprocessing import FederatedLearningDataset
 from fed_iid import train_local, aggregate_weights
 from centralizedmodel import LabelSmoothingCrossEntropy
 
-def run_experiment(Nc_value, J_value, is_iid=False):
+def run_fed_non_iid_experiment(Nc_value, J_value):
 
     K = 100
     C = 0.1
-    TOTAL_STEPS = 400
-    ROUNDS = TOTAL_STEPS // J_value
+    J = 4
+
+    # 逻辑调整：为了公平比较，固定“总通信预算”或“总计算步数”
+    # 项目书建议：When increasing J, scale accordingly the number of training rounds
+    # 我们设定基础：J=4 时跑 100 轮。那么 J=16 时（计算量4倍），轮数应为 25 轮。
+    # 或者为了观察收敛，设定一个基准总步数（例如 400 步）
+    ROUNDS = 200
+
     BATCH_SIZE = 128
     LR = 0.01
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # 1 datapreprocessing
     fld = FederatedLearningDataset(N=K, C=Nc_value)
-    user_groups = fld.iid_partition() if is_iid else fld.non_iid_partition()
+    user_groups =  fld.non_iid_partition()
 
     # 2 model initialization
     global_model = CentralizedModel(num_classes=100).to(device)
@@ -32,7 +38,7 @@ def run_experiment(Nc_value, J_value, is_iid=False):
         'test_acc': []
     }
     best_acc = 0.0
-    print(f"\n>> Running: {'IID' if is_iid else f'Nc={Nc_value}'}, J={J_value}")
+    print(f"\n>> Running: { f'Nc={Nc_value}'}, J={J_value}")
 
 
 
@@ -43,7 +49,6 @@ def run_experiment(Nc_value, J_value, is_iid=False):
             print(f"\n>>> Round {r + 1}: Unfreezing the backbone for fine-tuning! <<<")
             for param in global_model.backbone.parameters():
                 param.requires_grad = True
-
         # 动态学习率衰减逻辑
         current_lr = LR
         if r >= unfreeze_round:
@@ -58,7 +63,7 @@ def run_experiment(Nc_value, J_value, is_iid=False):
 
         for client_id in selected_clients:
             # directly call fed_iid train function
-            w, loss= train_local(
+            w, _= train_local(
                 model=copy.deepcopy(global_model),
                 dataset_indices=user_groups[client_id],
                 full_dataset=fld.train_dataset,
@@ -93,12 +98,6 @@ def run_experiment(Nc_value, J_value, is_iid=False):
 
 
 if __name__ == "__main__":
-    results = {}
-    # run combination experiment
-    for nc in [1, 5, 10, 50]:
-        for j in [4, 8, 16]:
-            tag = f"Nc{nc}_J{j}"
-            results[tag] = run_experiment(nc, j)
-
-    with open('non_iid_history.json', 'w') as f:
+    results= run_fed_non_iid_experiment(1,4)
+    with open('non_iid_history_Nc1_J4.json', 'w') as f:
         json.dump(results, f, indent=4)
