@@ -8,7 +8,7 @@ from centralizedmodel import CentralizedModel, evaluate
 from datapreprocessing import FederatedLearningDataset
 import json
 #Federated_learning independent and identically distributed
-def train_local(model, dataset_indices, full_dataset, epochs, batch_size, lr, momentum, weight_decay, device):
+def train_local(model, dataset_indices, full_dataset, epochs, batch_size, lr, momentum, weight_decay, device,J=4):
     """
     execute the training loop
     J=4 (local steps)，by epoch and batch to achieve。
@@ -34,7 +34,7 @@ def train_local(model, dataset_indices, full_dataset, epochs, batch_size, lr, mo
     preventing some clients from overtraining and causing model bias.
     '''
     steps_count = 0
-    max_steps = 4
+    max_steps = J
     #training loop
     running_loss = 0.0
     for epoch in range(1): # 通常 J 很小时 1 个 epoch 足够

@@ -32,6 +32,20 @@ def run_experiment(Nc_value, J_value, is_iid=False):
 
     # 3. federated learning train loop
     for r in range(ROUNDS):
+        unfreeze_round = ROUNDS // 4
+        if r == unfreeze_round:
+            print(f"\n>>> Round {r + 1}: Unfreezing the backbone for fine-tuning! <<<")
+            for param in global_model.backbone.parameters():
+                param.requires_grad = True
+
+        # 动态学习率衰减逻辑
+        current_lr = LR
+        if r >= unfreeze_round:
+            current_lr = LR * 0.1
+        if r >= ROUNDS * 0.6:
+            current_lr = LR * 0.01
+        if r >= ROUNDS * 0.8:
+            current_lr = LR * 0.001
         local_weights = []
         m = max(int(C * K), 1)
         selected_clients = np.random.choice(range(K), m, replace=False)

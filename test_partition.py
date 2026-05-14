@@ -217,12 +217,12 @@ def test_partition():
     print("Test Summary")
     print("=" * 60)
 
-    print("✅ IID Partition Characteristics:")
+    print("  IID Partition Characteristics:")
     print("   - Each client has samples from all classes")
     print("   - Sample count distribution is uniform")
     print("   - Simulates ideal scenario")
 
-    print("\n✅ Non-IID Partition Characteristics:")
+    print("\n  Non-IID Partition Characteristics:")
     print("   - Each client has samples from only a few classes")
     print("   - Sample counts remain relatively balanced")
     print("   - Simulates real-world scenario (limited user interests)")

@@ -1,3 +1,0 @@
-Using cache found in /home/xi/.cache/torch/hub/facebookresearch_dino_main
-/home/xi/miniconda3/envs/torch_env/lib/python3.10/site-packages/torch/cuda/__init__.py:716: UserWarning: Can't initialize NVML
-  warnings.warn("Can't initialize NVML")
