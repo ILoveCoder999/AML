@@ -7,8 +7,9 @@ from torch.utils.data import DataLoader, Subset
 from centralizedmodel import CentralizedModel, evaluate
 from datapreprocessing import FederatedLearningDataset
 import json
+from centralizedmodel import LabelSmoothingCrossEntropy
 #Federated_learning independent and identically distributed
-def train_local(model, dataset_indices, full_dataset, epochs, batch_size, lr, momentum, weight_decay, device,J=4):
+def train_local(model, dataset_indices, full_dataset,  batch_size, lr, momentum, weight_decay, device,J=4):
     """
     execute the training loop
     J=4 (local steps)，by epoch and batch to achieve。
@@ -34,30 +35,36 @@ def train_local(model, dataset_indices, full_dataset, epochs, batch_size, lr, mo
     preventing some clients from overtraining and causing model bias.
     '''
     steps_count = 0
-    max_steps = J
     #training loop
     running_loss = 0.0
-    for epoch in range(1): # 通常 J 很小时 1 个 epoch 足够
-        for inputs, targets in loader:
-            if steps_count >= max_steps:
-                break
-            inputs, targets = inputs.to(device), targets.to(device) #load data
-            optimizer.zero_grad() #clean residual gradients from the previous step
-            outputs = model(inputs) #forward propagation :calculate model predictions
-            loss = criterion(outputs, targets)#calculate the error between prediction and true labels(loss)
-            loss.backward() #backward propagation:calculate gradients
-            optimizer.step() #update model weights
-            #accumulate the errors generated in these 4 steps
-            # making it easier to calculate the average value at the end.
-            running_loss += loss.item()
-            steps_count += 1
-        if steps_count >= max_steps:
-            break
+
+    #构建无限迭代器
+    data_iter=iter(loader)
+
+    while steps_count < J: # 通常 J 很小时 1 个 epoch 足够
+        try:
+            inputs,targets=next(data_iter)
+        except StopIteration:
+            #如果当前epoch 的数据用完了,重新洗牌开始下一个epoch
+            data_iter=iter(loader)
+            inputs,targets=next(data_iter)
+
+        inputs, targets = inputs.to(device), targets.to(device) #load data
+        optimizer.zero_grad() #clean residual gradients from the previous step
+        outputs = model(inputs) #forward propagation :calculate model predictions
+        loss = criterion(outputs, targets)#calculate the error between prediction and true labels(loss)
+        loss.backward() #backward propagation:calculate gradients
+        optimizer.step() #update model weights
+        #accumulate the errors generated in these 4 steps
+        # making it easier to calculate the average value at the end.
+        running_loss += loss.item()
+        steps_count += 1
+
             # not return the entire model or the training data, but only the updated model weight parameters (in dictionary format).
             # The central server receives the `state_dict` returned by each client,
             # and then averages and merges them proportionally to generate a new global model.
 
-    return model.state_dict(), running_loss / max_steps
+    return model.state_dict(), running_loss / J
 
 '''
 `local_weights_list`:  On the server side, after all selected clients complete their local training 
@@ -120,8 +127,7 @@ def run_fedavg_experiment():
     
     # test set prepare
     test_loader = DataLoader(fld.test_dataset, batch_size=64, shuffle=False)
-    criterion = nn.CrossEntropyLoss()
-
+    criterion = LabelSmoothingCrossEntropy(smoothing=0.1)
     print(f"Starting FedAvg: N={N}, C={C}, J={J}")
 
     history = {
@@ -157,7 +163,7 @@ def run_fedavg_experiment():
                 model=copy.deepcopy(global_model),#must Otherwise, the model will change after the first client is trained.
                 dataset_indices=user_groups[client_id],# Private data assigned to this client
                 full_dataset=fld.train_dataset,
-                epochs=1,
+
                 batch_size=BATCH_SIZE,
                 lr=current_lr,
                 momentum=0.9,

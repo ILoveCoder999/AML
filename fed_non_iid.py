@@ -6,7 +6,7 @@ from torch.utils.data import DataLoader
 from centralizedmodel import CentralizedModel, evaluate
 from datapreprocessing import FederatedLearningDataset
 from fed_iid import train_local, aggregate_weights
-
+from centralizedmodel import LabelSmoothingCrossEntropy
 
 def run_experiment(Nc_value, J_value, is_iid=False):
 
@@ -14,7 +14,7 @@ def run_experiment(Nc_value, J_value, is_iid=False):
     C = 0.1
     TOTAL_STEPS = 400
     ROUNDS = TOTAL_STEPS // J_value
-    BATCH_SIZE = 32
+    BATCH_SIZE = 128
     LR = 0.01
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -25,10 +25,16 @@ def run_experiment(Nc_value, J_value, is_iid=False):
     # 2 model initialization
     global_model = CentralizedModel(num_classes=100).to(device)
     test_loader = DataLoader(fld.test_dataset, batch_size=64, shuffle=False)
-    criterion = torch.nn.CrossEntropyLoss()
-
+    criterion = LabelSmoothingCrossEntropy(smoothing=0.1)
+    history = {
+        'train_loss': [],
+        'test_loss': [],
+        'test_acc': []
+    }
     best_acc = 0.0
     print(f"\n>> Running: {'IID' if is_iid else f'Nc={Nc_value}'}, J={J_value}")
+
+
 
     # 3. federated learning train loop
     for r in range(ROUNDS):
@@ -52,7 +58,7 @@ def run_experiment(Nc_value, J_value, is_iid=False):
 
         for client_id in selected_clients:
             # directly call fed_iid train function
-            w, _ = train_local(
+            w, loss= train_local(
                 model=copy.deepcopy(global_model),
                 dataset_indices=user_groups[client_id],
                 full_dataset=fld.train_dataset,
@@ -69,13 +75,21 @@ def run_experiment(Nc_value, J_value, is_iid=False):
         global_model.load_state_dict(aggregate_weights(local_weights))
 
         # evaluate (call centralizedmodel evaluate function)
-        _, acc = evaluate(global_model, test_loader, criterion, device)
+        test_loss, acc = evaluate(global_model, test_loader, criterion, device)
         best_acc = max(best_acc, acc)
 
-        if (r + 1) % 5 == 0:
-            print(f"Round {r + 1}/{ROUNDS} | Best Acc: {best_acc:.2f}%")
+        # 记录数据 (强烈建议套上 float()，防止 PyTorch Tensor 导致后续 JSON 序列化报错)
+        avg_train_loss = test_loss/ m
+        history['train_loss'].append(float(avg_train_loss))
+        history['test_loss'].append(float(test_loss))  # 新增这行
+        history['test_acc'].append(float(acc))
 
-    return best_acc
+        # 修改打印逻辑：顺便把 test_loss 也打印到控制台
+        if (r + 1) % 5 == 0:
+            print(f"Round {r + 1}/{ROUNDS} | Train Loss: {avg_train_loss:.4f} | "
+                  f"Test Loss: {test_loss:.4f} | Test Acc: {acc:.2f}% | Best Acc: {best_acc:.2f}%")
+
+    return history
 
 
 if __name__ == "__main__":
@@ -86,5 +100,5 @@ if __name__ == "__main__":
             tag = f"Nc{nc}_J{j}"
             results[tag] = run_experiment(nc, j)
 
-    with open('non_iid_results.json', 'w') as f:
+    with open('non_iid_history.json', 'w') as f:
         json.dump(results, f, indent=4)
