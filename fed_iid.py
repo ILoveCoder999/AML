@@ -135,10 +135,13 @@ def run_fedavg_experiment():
             for param in global_model.backbone.parameters():
                 param.requires_grad = True
         current_lr = LR
-        if r >= 100:
-            current_lr = LR * 0.1  # 第200轮降为 0.0001
-        if r >= 150:
-            current_lr = LR * 0.01  # 第300轮降为 0.00001
+        if r >= 50:
+            current_lr = LR * 0.1  # 第 51 轮 (r=50) 解冻瞬间，立刻降为 0.001
+        if r >= 120:
+            current_lr = LR * 0.01  # 第 121 轮，降为 0.0001 (进入平稳微调期)
+        if r >= 160:
+            current_lr = LR * 0.001  # 第 161 轮，降为 0.00001 (收尾阶段)
+
         local_weights = [] #collect model weight (all participating clients the round)
         m = int(C * N) # selected the number of clients every round
         #select m from N,build []
@@ -167,23 +170,26 @@ def run_fedavg_experiment():
         # Aggregate update global model
         global_weights = aggregate_weights(local_weights)
         global_model.load_state_dict(global_weights)
-        
+
+        avg_train_loss = round_loss / m
+
         # An evaluation is conducted at the end of each round.
         test_loss, test_acc = evaluate(global_model, test_loader, criterion, device)
         print(f"Round [{r + 1}/{ROUNDS}] - Train Loss: {round_loss / m:.4f}, Test Loss: {test_loss:.4f}, Test Acc: {test_acc:.2f}%")
 
         #  将这一轮的数据存入字典
-        history['train_loss'].append(float(round_loss))
+        history['train_loss'].append(float(avg_train_loss))
         history['test_loss'].append(float(test_loss))
         history['test_acc'].append(float(test_acc))
-
-        output_filename = 'fedavg_training_history.json'
-        with open(output_filename, 'w') as f:
-            json.dump(history, f, indent=4)
-        print(f"\n>>> 训练完成！所有历史数据已保存至 {output_filename}")
         # checkpoint
         if (r + 1) % 10 == 0:
-            torch.save(global_model.state_dict(), f'fedavg_checkpoint_r{r+1}.pth')
+            torch.save(global_model.state_dict(), f'fedavg_checkpoint_r{r + 1}.pth')
+
+    output_filename = 'fedavg_training_history.json'
+    with open(output_filename, 'w') as f:
+        json.dump(history, f, indent=4)
+    print(f"\n>>> 训练完成！所有历史数据已保存至 {output_filename}")
+
 
 if __name__ == "__main__":
     run_fedavg_experiment()

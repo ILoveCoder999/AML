@@ -1,0 +1,304 @@
+Using cache found in /home/xi/.cache/torch/hub/facebookresearch_dino_main
+/home/xi/miniconda3/envs/torch_env/lib/python3.10/site-packages/torch/cuda/__init__.py:716: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Using device: cuda
+Files already downloaded and verified
+Files already downloaded and verified
+IID partition of 100 clients
+
+Using cache found in /home/xi/.cache/torch/hub/facebookresearch_dino_main
+/home/xi/miniconda3/envs/torch_env/lib/python3.10/site-packages/torch/cuda/__init__.py:716: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Starting FedAvg: N=100, C=0.1, J=4
+Round [1/200] - Train Loss: 8.0404, Test Loss: 7.6474, Test Acc: 0.85%
+Round [2/200] - Train Loss: 7.2317, Test Loss: 7.4545, Test Acc: 0.87%
+Round [3/200] - Train Loss: 6.8289, Test Loss: 7.2917, Test Acc: 1.03%
+Round [4/200] - Train Loss: 6.6563, Test Loss: 7.1509, Test Acc: 1.13%
+Round [5/200] - Train Loss: 6.4690, Test Loss: 7.0272, Test Acc: 1.21%
+Round [6/200] - Train Loss: 6.3299, Test Loss: 6.9157, Test Acc: 1.34%
+Round [7/200] - Train Loss: 6.1142, Test Loss: 6.8163, Test Acc: 1.46%
+Using device: cuda
+Files already downloaded and verified
+Files already downloaded and verified
+IID partition of 100 clients
+
+Using cache found in /home/xi/.cache/torch/hub/facebookresearch_dino_main
+/home/xi/miniconda3/envs/torch_env/lib/python3.10/site-packages/torch/cuda/__init__.py:716: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Starting FedAvg: N=100, C=0.1, J=4
+Round [1/200] - Train Loss: 7.4132, Test Loss: 6.5995, Test Acc: 1.24%
+Round [2/200] - Train Loss: 6.4423, Test Loss: 5.8913, Test Acc: 2.84%
+Round [3/200] - Train Loss: 5.6364, Test Loss: 5.3545, Test Acc: 4.40%
+Round [4/200] - Train Loss: 5.1487, Test Loss: 4.9741, Test Acc: 6.59%
+Round [5/200] - Train Loss: 4.7947, Test Loss: 4.5913, Test Acc: 9.05%
+Round [6/200] - Train Loss: 4.4770, Test Loss: 4.3055, Test Acc: 11.91%
+Round [7/200] - Train Loss: 4.2021, Test Loss: 4.0271, Test Acc: 14.44%
+Round [8/200] - Train Loss: 4.0333, Test Loss: 3.7992, Test Acc: 17.61%
+Round [9/200] - Train Loss: 3.7849, Test Loss: 3.5941, Test Acc: 20.02%
+Round [10/200] - Train Loss: 3.7215, Test Loss: 3.4199, Test Acc: 22.70%
+Round [11/200] - Train Loss: 3.5422, Test Loss: 3.2956, Test Acc: 24.09%
+Round [12/200] - Train Loss: 3.4865, Test Loss: 3.1581, Test Acc: 26.02%
+Round [13/200] - Train Loss: 3.3676, Test Loss: 3.0639, Test Acc: 27.87%
+Round [14/200] - Train Loss: 3.2748, Test Loss: 2.9514, Test Acc: 29.64%
+Round [15/200] - Train Loss: 3.1179, Test Loss: 2.8644, Test Acc: 31.32%
+Round [16/200] - Train Loss: 3.1267, Test Loss: 2.7568, Test Acc: 33.19%
+Round [17/200] - Train Loss: 3.0013, Test Loss: 2.6943, Test Acc: 34.49%
+Round [18/200] - Train Loss: 3.0000, Test Loss: 2.6055, Test Acc: 35.82%
+Round [19/200] - Train Loss: 2.9358, Test Loss: 2.5761, Test Acc: 36.30%
+Round [20/200] - Train Loss: 2.9024, Test Loss: 2.4939, Test Acc: 37.82%
+Round [21/200] - Train Loss: 2.8752, Test Loss: 2.4614, Test Acc: 38.81%
+Round [22/200] - Train Loss: 2.7739, Test Loss: 2.4041, Test Acc: 39.67%
+Round [23/200] - Train Loss: 2.7253, Test Loss: 2.3696, Test Acc: 40.14%
+Round [24/200] - Train Loss: 2.7231, Test Loss: 2.3119, Test Acc: 41.49%
+Round [25/200] - Train Loss: 2.7496, Test Loss: 2.2673, Test Acc: 42.49%
+Round [26/200] - Train Loss: 2.7004, Test Loss: 2.2404, Test Acc: 42.93%
+Round [27/200] - Train Loss: 2.5884, Test Loss: 2.2127, Test Acc: 43.54%
+Round [28/200] - Train Loss: 2.5801, Test Loss: 2.1756, Test Acc: 44.33%
+Round [29/200] - Train Loss: 2.5695, Test Loss: 2.1145, Test Acc: 45.13%
+Round [30/200] - Train Loss: 2.5159, Test Loss: 2.1055, Test Acc: 45.35%
+Round [31/200] - Train Loss: 2.4642, Test Loss: 2.0640, Test Acc: 46.38%
+Round [32/200] - Train Loss: 2.4958, Test Loss: 2.0456, Test Acc: 46.81%
+Round [33/200] - Train Loss: 2.5033, Test Loss: 2.0187, Test Acc: 47.29%
+Round [34/200] - Train Loss: 2.4709, Test Loss: 1.9954, Test Acc: 48.06%
+Round [35/200] - Train Loss: 2.4330, Test Loss: 1.9766, Test Acc: 48.14%
+Round [36/200] - Train Loss: 2.4054, Test Loss: 1.9623, Test Acc: 48.43%
+Round [37/200] - Train Loss: 2.3775, Test Loss: 1.9272, Test Acc: 49.47%
+Round [38/200] - Train Loss: 2.3207, Test Loss: 1.9083, Test Acc: 49.86%
+Round [39/200] - Train Loss: 2.3346, Test Loss: 1.8913, Test Acc: 50.21%
+Round [40/200] - Train Loss: 2.3195, Test Loss: 1.8780, Test Acc: 50.45%
+Round [41/200] - Train Loss: 2.3604, Test Loss: 1.8641, Test Acc: 50.96%
+Round [42/200] - Train Loss: 2.2602, Test Loss: 1.8595, Test Acc: 50.73%
+Round [43/200] - Train Loss: 2.2910, Test Loss: 1.8244, Test Acc: 51.71%
+Round [44/200] - Train Loss: 2.2774, Test Loss: 1.8154, Test Acc: 51.63%
+Round [45/200] - Train Loss: 2.2625, Test Loss: 1.8107, Test Acc: 51.95%
+Round [46/200] - Train Loss: 2.2460, Test Loss: 1.7859, Test Acc: 52.56%
+Round [47/200] - Train Loss: 2.2104, Test Loss: 1.7952, Test Acc: 52.69%
+Round [48/200] - Train Loss: 2.2805, Test Loss: 1.7661, Test Acc: 53.02%
+Round [49/200] - Train Loss: 2.1855, Test Loss: 1.7626, Test Acc: 52.98%
+Round [50/200] - Train Loss: 2.2392, Test Loss: 1.7395, Test Acc: 53.41%
+
+>>> Round 51: Unfreezing the backbone for fine-tuning! <<<
+Round [51/200] - Train Loss: 7.0977, Test Loss: 6.6930, Test Acc: 1.30%
+Round [52/200] - Train Loss: 7.8277, Test Loss: 7.0317, Test Acc: 1.00%
+Round [53/200] - Train Loss: 7.1339, Test Loss: 6.1080, Test Acc: 1.07%
+Round [54/200] - Train Loss: 6.2587, Test Loss: 5.6681, Test Acc: 1.13%
+Round [55/200] - Train Loss: 5.9367, Test Loss: 5.4134, Test Acc: 1.00%
+Round [56/200] - Train Loss: 5.6875, Test Loss: 5.2121, Test Acc: 1.20%
+Round [57/200] - Train Loss: 5.5475, Test Loss: 5.0492, Test Acc: 1.50%
+Round [58/200] - Train Loss: 5.3548, Test Loss: 4.9508, Test Acc: 1.62%
+Round [59/200] - Train Loss: 5.2879, Test Loss: 4.8839, Test Acc: 1.31%
+Round [60/200] - Train Loss: 5.1710, Test Loss: 4.7991, Test Acc: 1.56%
+Round [61/200] - Train Loss: 5.1038, Test Loss: 4.7568, Test Acc: 1.21%
+Using device: cuda
+Files already downloaded and verified
+Files already downloaded and verified
+IID partition of 100 clients
+
+Using cache found in /home/xi/.cache/torch/hub/facebookresearch_dino_main
+/home/xi/miniconda3/envs/torch_env/lib/python3.10/site-packages/torch/cuda/__init__.py:716: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+Starting FedAvg: N=100, C=0.1, J=4
+Round [1/200] - Train Loss: 7.5652, Test Loss: 6.8601, Test Acc: 1.78%
+Round [2/200] - Train Loss: 6.5823, Test Loss: 5.7863, Test Acc: 3.75%
+Round [3/200] - Train Loss: 5.8667, Test Loss: 5.2870, Test Acc: 4.84%
+Round [4/200] - Train Loss: 5.3154, Test Loss: 4.8213, Test Acc: 7.75%
+Round [5/200] - Train Loss: 4.8611, Test Loss: 4.5078, Test Acc: 9.82%
+Round [6/200] - Train Loss: 4.5065, Test Loss: 4.1610, Test Acc: 13.25%
+Round [7/200] - Train Loss: 4.2982, Test Loss: 4.0302, Test Acc: 14.51%
+Round [8/200] - Train Loss: 4.0434, Test Loss: 3.8818, Test Acc: 16.99%
+Round [9/200] - Train Loss: 3.8933, Test Loss: 3.6372, Test Acc: 19.12%
+Round [10/200] - Train Loss: 3.6614, Test Loss: 3.4558, Test Acc: 22.32%
+Round [11/200] - Train Loss: 3.6179, Test Loss: 3.3134, Test Acc: 24.13%
+Round [12/200] - Train Loss: 3.4468, Test Loss: 3.1446, Test Acc: 26.56%
+Round [13/200] - Train Loss: 3.3454, Test Loss: 3.0507, Test Acc: 27.96%
+Round [14/200] - Train Loss: 3.3041, Test Loss: 2.9185, Test Acc: 29.92%
+Round [15/200] - Train Loss: 3.1696, Test Loss: 2.8599, Test Acc: 31.42%
+Round [16/200] - Train Loss: 3.1664, Test Loss: 2.7480, Test Acc: 32.97%
+Round [17/200] - Train Loss: 3.0726, Test Loss: 2.6807, Test Acc: 34.24%
+Round [18/200] - Train Loss: 3.0171, Test Loss: 2.5851, Test Acc: 36.05%
+Round [19/200] - Train Loss: 2.8960, Test Loss: 2.5432, Test Acc: 36.75%
+Round [20/200] - Train Loss: 2.8834, Test Loss: 2.4705, Test Acc: 38.39%
+Round [21/200] - Train Loss: 2.8590, Test Loss: 2.4344, Test Acc: 39.41%
+Round [22/200] - Train Loss: 2.8475, Test Loss: 2.3625, Test Acc: 40.63%
+Round [23/200] - Train Loss: 2.7856, Test Loss: 2.3386, Test Acc: 40.72%
+Round [24/200] - Train Loss: 2.7586, Test Loss: 2.2746, Test Acc: 42.14%
+Round [25/200] - Train Loss: 2.6867, Test Loss: 2.2761, Test Acc: 42.47%
+Round [26/200] - Train Loss: 2.6904, Test Loss: 2.2131, Test Acc: 43.70%
+Round [27/200] - Train Loss: 2.6188, Test Loss: 2.1857, Test Acc: 44.43%
+Round [28/200] - Train Loss: 2.5989, Test Loss: 2.1340, Test Acc: 45.14%
+Round [29/200] - Train Loss: 2.5632, Test Loss: 2.1327, Test Acc: 45.59%
+Round [30/200] - Train Loss: 2.4742, Test Loss: 2.0585, Test Acc: 47.14%
+Round [31/200] - Train Loss: 2.4969, Test Loss: 2.0697, Test Acc: 46.67%
+Round [32/200] - Train Loss: 2.5092, Test Loss: 2.0082, Test Acc: 48.53%
+Round [33/200] - Train Loss: 2.4639, Test Loss: 2.0047, Test Acc: 48.33%
+Round [34/200] - Train Loss: 2.4689, Test Loss: 1.9877, Test Acc: 48.44%
+Round [35/200] - Train Loss: 2.4317, Test Loss: 1.9501, Test Acc: 49.54%
+Round [36/200] - Train Loss: 2.4161, Test Loss: 1.9248, Test Acc: 49.97%
+Round [37/200] - Train Loss: 2.4111, Test Loss: 1.9296, Test Acc: 49.91%
+Round [38/200] - Train Loss: 2.3443, Test Loss: 1.8835, Test Acc: 50.86%
+Round [39/200] - Train Loss: 2.3656, Test Loss: 1.8818, Test Acc: 50.92%
+Round [40/200] - Train Loss: 2.3141, Test Loss: 1.8698, Test Acc: 51.38%
+Round [41/200] - Train Loss: 2.3171, Test Loss: 1.8467, Test Acc: 51.97%
+Round [42/200] - Train Loss: 2.3436, Test Loss: 1.8370, Test Acc: 52.17%
+Round [43/200] - Train Loss: 2.2735, Test Loss: 1.8140, Test Acc: 52.68%
+Round [44/200] - Train Loss: 2.2746, Test Loss: 1.7879, Test Acc: 53.55%
+Round [45/200] - Train Loss: 2.2326, Test Loss: 1.7896, Test Acc: 53.28%
+Round [46/200] - Train Loss: 2.1857, Test Loss: 1.7793, Test Acc: 53.51%
+Round [47/200] - Train Loss: 2.1984, Test Loss: 1.7796, Test Acc: 53.19%
+Round [48/200] - Train Loss: 2.2063, Test Loss: 1.7506, Test Acc: 54.13%
+Round [49/200] - Train Loss: 2.2139, Test Loss: 1.7387, Test Acc: 53.91%
+Round [50/200] - Train Loss: 2.2292, Test Loss: 1.7208, Test Acc: 54.60%
+
+>>> Round 51: Unfreezing the backbone for fine-tuning! <<<
+Round [51/200] - Train Loss: 5.6803, Test Loss: 6.8554, Test Acc: 1.77%
+Round [52/200] - Train Loss: 6.7662, Test Loss: 5.2748, Test Acc: 3.94%
+Round [53/200] - Train Loss: 5.2551, Test Loss: 4.4331, Test Acc: 5.92%
+Round [54/200] - Train Loss: 4.5877, Test Loss: 4.0885, Test Acc: 9.23%
+Round [55/200] - Train Loss: 4.2895, Test Loss: 3.8175, Test Acc: 13.01%
+Round [56/200] - Train Loss: 4.0435, Test Loss: 3.5547, Test Acc: 17.41%
+Round [57/200] - Train Loss: 3.8205, Test Loss: 3.2378, Test Acc: 22.68%
+Round [58/200] - Train Loss: 3.5896, Test Loss: 3.1417, Test Acc: 24.10%
+Round [59/200] - Train Loss: 3.3860, Test Loss: 2.7861, Test Acc: 31.04%
+Round [60/200] - Train Loss: 3.1699, Test Loss: 2.6062, Test Acc: 34.23%
+Round [61/200] - Train Loss: 2.8321, Test Loss: 2.4396, Test Acc: 37.25%
+Round [62/200] - Train Loss: 2.7759, Test Loss: 2.1748, Test Acc: 43.70%
+Round [63/200] - Train Loss: 2.3284, Test Loss: 1.8055, Test Acc: 51.31%
+Round [64/200] - Train Loss: 2.2366, Test Loss: 1.8633, Test Acc: 50.08%
+Round [65/200] - Train Loss: 2.1469, Test Loss: 1.5829, Test Acc: 56.57%
+Round [66/200] - Train Loss: 1.9453, Test Loss: 1.6444, Test Acc: 54.99%
+Round [67/200] - Train Loss: 1.9818, Test Loss: 1.5207, Test Acc: 57.86%
+Round [68/200] - Train Loss: 1.8161, Test Loss: 1.3680, Test Acc: 61.40%
+Round [69/200] - Train Loss: 1.6708, Test Loss: 1.4857, Test Acc: 58.53%
+Round [70/200] - Train Loss: 1.7419, Test Loss: 1.3633, Test Acc: 61.62%
+Round [71/200] - Train Loss: 1.5103, Test Loss: 1.2689, Test Acc: 64.29%
+Round [72/200] - Train Loss: 1.4948, Test Loss: 1.1813, Test Acc: 66.28%
+Round [73/200] - Train Loss: 1.4001, Test Loss: 1.0743, Test Acc: 68.90%
+Round [74/200] - Train Loss: 1.3191, Test Loss: 1.0859, Test Acc: 68.43%
+Round [75/200] - Train Loss: 1.3243, Test Loss: 1.0554, Test Acc: 68.95%
+Round [76/200] - Train Loss: 1.2482, Test Loss: 1.0599, Test Acc: 68.86%
+Round [77/200] - Train Loss: 1.3483, Test Loss: 1.1023, Test Acc: 67.83%
+Round [78/200] - Train Loss: 1.3155, Test Loss: 1.0180, Test Acc: 70.47%
+Round [79/200] - Train Loss: 1.1961, Test Loss: 0.9872, Test Acc: 71.06%
+Round [80/200] - Train Loss: 1.2166, Test Loss: 0.9605, Test Acc: 71.62%
+Round [81/200] - Train Loss: 1.1687, Test Loss: 0.9679, Test Acc: 71.20%
+Round [82/200] - Train Loss: 1.1954, Test Loss: 0.9917, Test Acc: 70.69%
+Round [83/200] - Train Loss: 1.2093, Test Loss: 0.9339, Test Acc: 72.59%
+Round [84/200] - Train Loss: 1.1360, Test Loss: 0.8846, Test Acc: 73.33%
+Round [85/200] - Train Loss: 1.0864, Test Loss: 0.8617, Test Acc: 74.28%
+Round [86/200] - Train Loss: 1.0305, Test Loss: 0.8720, Test Acc: 74.18%
+Round [87/200] - Train Loss: 1.0328, Test Loss: 0.8452, Test Acc: 74.88%
+Round [88/200] - Train Loss: 1.0616, Test Loss: 0.8785, Test Acc: 73.88%
+Round [89/200] - Train Loss: 0.9640, Test Loss: 0.8427, Test Acc: 74.46%
+Round [90/200] - Train Loss: 1.0588, Test Loss: 0.8541, Test Acc: 74.65%
+Round [91/200] - Train Loss: 1.0517, Test Loss: 0.8271, Test Acc: 74.96%
+Round [92/200] - Train Loss: 1.0545, Test Loss: 0.8519, Test Acc: 74.74%
+Round [93/200] - Train Loss: 1.0192, Test Loss: 0.8179, Test Acc: 75.25%
+Round [94/200] - Train Loss: 0.9913, Test Loss: 0.8292, Test Acc: 75.25%
+Round [95/200] - Train Loss: 0.9750, Test Loss: 0.7826, Test Acc: 76.16%
+Round [96/200] - Train Loss: 0.9644, Test Loss: 0.7668, Test Acc: 76.95%
+Round [97/200] - Train Loss: 0.9063, Test Loss: 0.7719, Test Acc: 76.75%
+Round [98/200] - Train Loss: 0.9600, Test Loss: 0.7674, Test Acc: 76.99%
+Round [99/200] - Train Loss: 0.8905, Test Loss: 0.7484, Test Acc: 77.26%
+Round [100/200] - Train Loss: 0.9015, Test Loss: 0.7693, Test Acc: 76.81%
+Round [101/200] - Train Loss: 0.9057, Test Loss: 0.7906, Test Acc: 75.96%
+Round [102/200] - Train Loss: 0.9187, Test Loss: 0.7316, Test Acc: 77.72%
+Round [103/200] - Train Loss: 0.8908, Test Loss: 0.7173, Test Acc: 78.21%
+Round [104/200] - Train Loss: 0.8528, Test Loss: 0.7244, Test Acc: 78.00%
+Round [105/200] - Train Loss: 0.8108, Test Loss: 0.7345, Test Acc: 77.96%
+Round [106/200] - Train Loss: 0.8186, Test Loss: 0.7290, Test Acc: 78.23%
+Round [107/200] - Train Loss: 0.8433, Test Loss: 0.7231, Test Acc: 78.14%
+Round [108/200] - Train Loss: 0.8022, Test Loss: 0.6935, Test Acc: 78.77%
+Round [109/200] - Train Loss: 0.7536, Test Loss: 0.6839, Test Acc: 79.37%
+Round [110/200] - Train Loss: 0.7611, Test Loss: 0.6801, Test Acc: 79.07%
+Round [111/200] - Train Loss: 0.7655, Test Loss: 0.6768, Test Acc: 79.46%
+Round [112/200] - Train Loss: 0.7646, Test Loss: 0.6679, Test Acc: 79.52%
+Round [113/200] - Train Loss: 0.8057, Test Loss: 0.6751, Test Acc: 79.45%
+Round [114/200] - Train Loss: 0.8058, Test Loss: 0.6695, Test Acc: 79.96%
+Round [115/200] - Train Loss: 0.7274, Test Loss: 0.6562, Test Acc: 79.54%
+Round [116/200] - Train Loss: 0.6906, Test Loss: 0.6684, Test Acc: 79.59%
+Round [117/200] - Train Loss: 0.7832, Test Loss: 0.6623, Test Acc: 79.57%
+Round [118/200] - Train Loss: 0.7472, Test Loss: 0.6710, Test Acc: 79.67%
+Round [119/200] - Train Loss: 0.7286, Test Loss: 0.6449, Test Acc: 80.31%
+Round [120/200] - Train Loss: 0.7138, Test Loss: 0.6404, Test Acc: 80.17%
+Round [121/200] - Train Loss: 0.5964, Test Loss: 0.6204, Test Acc: 80.61%
+Round [122/200] - Train Loss: 0.5566, Test Loss: 0.6150, Test Acc: 80.76%
+Round [123/200] - Train Loss: 0.5809, Test Loss: 0.6116, Test Acc: 81.08%
+Round [124/200] - Train Loss: 0.5551, Test Loss: 0.6055, Test Acc: 81.23%
+Round [125/200] - Train Loss: 0.4976, Test Loss: 0.6035, Test Acc: 81.28%
+Round [126/200] - Train Loss: 0.5453, Test Loss: 0.6009, Test Acc: 81.35%
+Round [127/200] - Train Loss: 0.5474, Test Loss: 0.5991, Test Acc: 81.35%
+Round [128/200] - Train Loss: 0.5337, Test Loss: 0.5964, Test Acc: 81.65%
+Round [129/200] - Train Loss: 0.5033, Test Loss: 0.5935, Test Acc: 81.63%
+Round [130/200] - Train Loss: 0.5581, Test Loss: 0.5940, Test Acc: 81.80%
+Round [131/200] - Train Loss: 0.5395, Test Loss: 0.5917, Test Acc: 81.72%
+Round [132/200] - Train Loss: 0.5028, Test Loss: 0.5902, Test Acc: 81.80%
+Round [133/200] - Train Loss: 0.4856, Test Loss: 0.5903, Test Acc: 81.83%
+Round [134/200] - Train Loss: 0.5009, Test Loss: 0.5870, Test Acc: 81.85%
+Round [135/200] - Train Loss: 0.4973, Test Loss: 0.5866, Test Acc: 81.96%
+Round [136/200] - Train Loss: 0.4945, Test Loss: 0.5877, Test Acc: 81.86%
+Round [137/200] - Train Loss: 0.5242, Test Loss: 0.5867, Test Acc: 81.93%
+Round [138/200] - Train Loss: 0.5296, Test Loss: 0.5863, Test Acc: 81.87%
+Round [139/200] - Train Loss: 0.5413, Test Loss: 0.5834, Test Acc: 81.89%
+Round [140/200] - Train Loss: 0.5068, Test Loss: 0.5833, Test Acc: 81.96%
+Round [141/200] - Train Loss: 0.5357, Test Loss: 0.5840, Test Acc: 81.83%
+Round [142/200] - Train Loss: 0.5290, Test Loss: 0.5830, Test Acc: 81.90%
+Round [143/200] - Train Loss: 0.5762, Test Loss: 0.5849, Test Acc: 81.81%
+Round [144/200] - Train Loss: 0.4715, Test Loss: 0.5846, Test Acc: 82.03%
+Round [145/200] - Train Loss: 0.5619, Test Loss: 0.5813, Test Acc: 81.98%
+Round [146/200] - Train Loss: 0.5416, Test Loss: 0.5780, Test Acc: 82.09%
+Round [147/200] - Train Loss: 0.5081, Test Loss: 0.5784, Test Acc: 82.07%
+Round [148/200] - Train Loss: 0.5046, Test Loss: 0.5793, Test Acc: 82.01%
+Round [149/200] - Train Loss: 0.4985, Test Loss: 0.5761, Test Acc: 82.05%
+Round [150/200] - Train Loss: 0.4699, Test Loss: 0.5762, Test Acc: 82.15%
+Round [151/200] - Train Loss: 0.5210, Test Loss: 0.5764, Test Acc: 82.13%
+Round [152/200] - Train Loss: 0.5199, Test Loss: 0.5748, Test Acc: 82.15%
+Round [153/200] - Train Loss: 0.5197, Test Loss: 0.5727, Test Acc: 82.26%
+Round [154/200] - Train Loss: 0.5058, Test Loss: 0.5724, Test Acc: 82.31%
+Round [155/200] - Train Loss: 0.5379, Test Loss: 0.5724, Test Acc: 82.30%
+Round [156/200] - Train Loss: 0.5177, Test Loss: 0.5747, Test Acc: 82.05%
+Round [157/200] - Train Loss: 0.5177, Test Loss: 0.5748, Test Acc: 82.17%
+Round [158/200] - Train Loss: 0.5345, Test Loss: 0.5729, Test Acc: 82.27%
+Round [159/200] - Train Loss: 0.4959, Test Loss: 0.5733, Test Acc: 82.07%
+Round [160/200] - Train Loss: 0.4986, Test Loss: 0.5728, Test Acc: 82.25%
+Round [161/200] - Train Loss: 0.4586, Test Loss: 0.5729, Test Acc: 82.26%
+Round [162/200] - Train Loss: 0.5058, Test Loss: 0.5725, Test Acc: 82.25%
+Round [163/200] - Train Loss: 0.5059, Test Loss: 0.5723, Test Acc: 82.30%
+Round [164/200] - Train Loss: 0.4912, Test Loss: 0.5721, Test Acc: 82.27%
+Round [165/200] - Train Loss: 0.5252, Test Loss: 0.5717, Test Acc: 82.30%
+Round [166/200] - Train Loss: 0.4858, Test Loss: 0.5718, Test Acc: 82.28%
+Round [167/200] - Train Loss: 0.5010, Test Loss: 0.5717, Test Acc: 82.28%
+Round [168/200] - Train Loss: 0.4860, Test Loss: 0.5717, Test Acc: 82.27%
+Round [169/200] - Train Loss: 0.5018, Test Loss: 0.5715, Test Acc: 82.29%
+Round [170/200] - Train Loss: 0.4583, Test Loss: 0.5711, Test Acc: 82.32%
+Round [171/200] - Train Loss: 0.5014, Test Loss: 0.5710, Test Acc: 82.29%
+Round [172/200] - Train Loss: 0.5088, Test Loss: 0.5710, Test Acc: 82.31%
+Round [173/200] - Train Loss: 0.4672, Test Loss: 0.5709, Test Acc: 82.32%
+Round [174/200] - Train Loss: 0.5151, Test Loss: 0.5706, Test Acc: 82.32%
+Round [175/200] - Train Loss: 0.4844, Test Loss: 0.5704, Test Acc: 82.36%
+Round [176/200] - Train Loss: 0.5170, Test Loss: 0.5705, Test Acc: 82.35%
+Round [177/200] - Train Loss: 0.5365, Test Loss: 0.5704, Test Acc: 82.34%
+Round [178/200] - Train Loss: 0.5139, Test Loss: 0.5703, Test Acc: 82.34%
+Round [179/200] - Train Loss: 0.4657, Test Loss: 0.5704, Test Acc: 82.34%
+Round [180/200] - Train Loss: 0.4810, Test Loss: 0.5701, Test Acc: 82.39%
+Round [181/200] - Train Loss: 0.5191, Test Loss: 0.5696, Test Acc: 82.40%
+Round [182/200] - Train Loss: 0.5199, Test Loss: 0.5695, Test Acc: 82.34%
+Round [183/200] - Train Loss: 0.4745, Test Loss: 0.5693, Test Acc: 82.36%
+Round [184/200] - Train Loss: 0.4874, Test Loss: 0.5693, Test Acc: 82.37%
+Round [185/200] - Train Loss: 0.4979, Test Loss: 0.5692, Test Acc: 82.37%
+Round [186/200] - Train Loss: 0.4746, Test Loss: 0.5690, Test Acc: 82.36%
+Round [187/200] - Train Loss: 0.5185, Test Loss: 0.5690, Test Acc: 82.36%
+Round [188/200] - Train Loss: 0.5234, Test Loss: 0.5689, Test Acc: 82.35%
+Round [189/200] - Train Loss: 0.4901, Test Loss: 0.5689, Test Acc: 82.40%
+Round [190/200] - Train Loss: 0.4692, Test Loss: 0.5686, Test Acc: 82.38%
+Round [191/200] - Train Loss: 0.5032, Test Loss: 0.5685, Test Acc: 82.42%
+Round [192/200] - Train Loss: 0.5455, Test Loss: 0.5687, Test Acc: 82.38%
+Round [193/200] - Train Loss: 0.4978, Test Loss: 0.5686, Test Acc: 82.42%
+Round [194/200] - Train Loss: 0.4656, Test Loss: 0.5688, Test Acc: 82.37%
+Round [195/200] - Train Loss: 0.5067, Test Loss: 0.5687, Test Acc: 82.36%
+Round [196/200] - Train Loss: 0.4787, Test Loss: 0.5686, Test Acc: 82.39%
+Round [197/200] - Train Loss: 0.5048, Test Loss: 0.5685, Test Acc: 82.37%
+Round [198/200] - Train Loss: 0.4868, Test Loss: 0.5685, Test Acc: 82.35%
+Round [199/200] - Train Loss: 0.4823, Test Loss: 0.5683, Test Acc: 82.39%
+Round [200/200] - Train Loss: 0.5017, Test Loss: 0.5683, Test Acc: 82.38%
+
+>>> 训练完成！所有历史数据已保存至 fedavg_training_history.json
