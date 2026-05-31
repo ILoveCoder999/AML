@@ -105,31 +105,41 @@ class FederatedLearningDataset:
     # Finally, each client randomly selects Nc shards. 
     # each client only has data from a few classes,  Non-IID (non-independent and identically distributed) data.
     def non_iid_partition(self, num_classes_per_client=None):
-        #the number of class per clients
         Nc = num_classes_per_client if num_classes_per_client is not None else self.C
 
-        total_indices = np.arange(len(self.train_dataset))
-        labels = self.train_targets
+        # 1. 找出所有唯一的类别标签
+        unique_labels = np.unique(self.train_targets)
 
-        ordered_indices = total_indices[np.argsort(labels)]
+        # 2. 将样本索引按类别分组存放
+        # class_dict = { class_id: [index1, index2, ...] }
+        class_dict = {label: np.where(self.train_targets == label)[0] for label in unique_labels}
 
-        total_shards = int(self.N * Nc)
-        samples_per_shard = len(ordered_indices) // total_shards
+        # 每个客户端需要分配到的样本总数
+        samples_per_client = len(self.train_dataset) // self.N
+        # 在拥有 Nc 个类的情况下，每个类需要贡献多少样本
+        samples_per_class_per_client = samples_per_client // Nc
 
-        # 创建 shards
-        shards = []
-        for i in range(total_shards):
-            start = i * samples_per_shard
-            end = (i + 1) * samples_per_shard if i < total_shards - 1 else len(ordered_indices)
-            shards.append(ordered_indices[start:end])
+        dict_clients = {i: [] for i in range(self.N)}
 
-        # 随机分配 shards 给 clients
-        shard_indices = np.random.permutation(total_shards)
-        dict_clients = {}
-
+        # 3. 为每个客户端随机挑选 Nc 个类别
         for i in range(self.N):
-            client_shards = shard_indices[i * Nc:(i + 1) * Nc]
-            dict_clients[i] = np.concatenate([shards[idx] for idx in client_shards])
+            # 从可用的 100 个类中随机抽 Nc 个类
+            selected_classes = np.random.choice(unique_labels, Nc, replace=False)
+
+            client_indices = []
+            for cls in selected_classes:
+                # 从该类别的样本池中，随机抽取指定数量的样本
+                selected_indices = np.random.choice(
+                    class_dict[cls],
+                    samples_per_class_per_client,
+                    replace=True
+                )
+                client_indices.append(selected_indices)
+
+                # (可选) 如果你不想让不同客户端抽到同一张图，可以把抽走的样本从 pool 中剔除
+                # class_dict[cls] = np.setdiff1d(class_dict[cls], selected_indices)
+
+            dict_clients[i] = np.concatenate(client_indices)
 
         return dict_clients
 

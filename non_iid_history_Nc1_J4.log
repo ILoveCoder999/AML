@@ -1,0 +1,27 @@
+Files already downloaded and verified
+Files already downloaded and verified
+Using cache found in /home/xi/.cache/torch/hub/facebookresearch_dino_main
+/home/xi/miniconda3/envs/torch_env/lib/python3.10/site-packages/torch/cuda/__init__.py:716: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+
+>> Running: Nc=1, J=4
+Round [001/200] | LR: 0.01000 | Tr Loss: 3.9663 | Te Loss: 10.2964 | Te Acc: 3.08% | Best: 3.08%
+Round [002/200] | LR: 0.01000 | Tr Loss: 6.0141 | Te Loss: 10.7167 | Te Acc: 2.87% | Best: 3.08%
+Round [003/200] | LR: 0.01000 | Tr Loss: 4.4526 | Te Loss: 13.8930 | Te Acc: 3.25% | Best: 3.25%
+Round [004/200] | LR: 0.01000 | Tr Loss: 7.5855 | Te Loss: 15.4932 | Te Acc: 1.22% | Best: 3.25%
+Round [005/200] | LR: 0.01000 | Tr Loss: 7.1114 | Te Loss: 16.4408 | Te Acc: 2.86% | Best: 3.25%
+Round [006/200] | LR: 0.01000 | Tr Loss: 10.0409 | Te Loss: 15.8364 | Te Acc: 2.58% | Best: 3.25%
+Round [007/200] | LR: 0.01000 | Tr Loss: 13.5536 | Te Loss: 14.8760 | Te Acc: 2.61% | Best: 3.25%
+Round [008/200] | LR: 0.01000 | Tr Loss: 8.8549 | Te Loss: 14.9470 | Te Acc: 2.83% | Best: 3.25%
+Round [009/200] | LR: 0.01000 | Tr Loss: 8.5596 | Te Loss: 15.7188 | Te Acc: 2.87% | Best: 3.25%
+Round [010/200] | LR: 0.01000 | Tr Loss: 18.4056 | Te Loss: 14.9022 | Te Acc: 2.43% | Best: 3.25%
+Traceback (most recent call last):
+  File "/home/xi/AML/fed_non_iid.py", line 136, in <module>
+    results= run_fed_non_iid_experiment(1,4)
+  File "/home/xi/AML/fed_non_iid.py", line 130, in run_fed_non_iid_experiment
+    torch.save(global_model.state_dict(), save_path)
+  File "/home/xi/miniconda3/envs/torch_env/lib/python3.10/site-packages/torch/serialization.py", line 846, in save
+    _check_save_filelike(f)
+  File "/home/xi/miniconda3/envs/torch_env/lib/python3.10/site-packages/torch/serialization.py", line 790, in _check_save_filelike
+    raise AttributeError(
+AttributeError: expected 'f' to be string, path, or a file-like object with a 'write' attribute
