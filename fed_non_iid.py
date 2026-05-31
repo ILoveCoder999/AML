@@ -113,7 +113,7 @@ def run_fed_non_iid_experiment(Nc_value, J_value):
 
         if (r + 1) % 10 == 0:
             checkpoint_name = f'non_iid_checkpoint_Nc{Nc_value}_J{J_value}_r{r + 1}.pth'
-            save_dir='checkpoint/fed_non_iid/J_8_Nc_50'
+            save_dir = f'checkpoint/fed_non_iid/J_{J_value}_Nc_{Nc_value}'
             os.makedirs(save_dir, exist_ok=True)  # 自动创建不存在的目录
             save_path=os.path.join(save_dir,checkpoint_name)
             torch.save(global_model.state_dict(), save_path)
@@ -122,7 +122,9 @@ def run_fed_non_iid_experiment(Nc_value, J_value):
 
 
 if __name__ == "__main__":
-    results= run_fed_non_iid_experiment(50,8)
+    for Nc in [1, 5, 10, 50]:
+        for J in [4, 8, 16]:
+            run_fed_non_iid_experiment(Nc, J)
     filename = f'non_iid_history_Nc{50}_J8.json'
     with open(filename, 'w') as f:
         json.dump(results, f, indent=4)
